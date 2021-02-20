@@ -24,3 +24,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# testing
+test.js
