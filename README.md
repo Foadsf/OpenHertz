@@ -11,14 +11,14 @@ OpenHertz is a Free, Libre, and Open Source software for Hertzian contact calcul
     * Cylinder-Plane (R)
     * Cylinder-Cylinder (R<sub>1</sub>-R<sub>2</sub>)
 
-- If the “Cylinder-Cylinder” is selected, then the orientation needs to be determined:
+- If the “Cylinder-Cylinder” option is selected, then the relative orientation of the cylinders needs to be determined:
     * Parallel
     * Perpendicular
-    * Angled (α)
+    <!-- * Angled (α) -->
 
 - Next, depending on the option selected on the first step, one or two radii should be determined
 - If the two sides of the contact are different materials or the same will be determined next.
-- Mechanical properties of the material(s) will be given to the software after that. Younge elastic modulus (E), Poisson ratio (ν), and Yield strength (σ<sub>Y</sub>) will be given.
+- Mechanical properties of the material(s) will be given to the software after that. Young elastic modulus (E), Poisson ratio (ν), and Yield strength (σ<sub>Y</sub>) will be given.
 - After all, the software will report the results automatically to the terminal
 
 ## FAQ:
