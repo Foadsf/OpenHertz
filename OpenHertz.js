@@ -66,6 +66,8 @@ while (!contact_type_status) {
                     WScript.StdOut.WriteLine("Please only put positive numbers.");
                 }
             }
+
+            var Rs = R1;
             break;
         case "4":
             WScript.StdOut.WriteLine("You selected (4) for a Cylinder-Cylinder contact.");
@@ -79,6 +81,21 @@ while (!contact_type_status) {
                     WScript.StdOut.WriteLine("You have entered the wrong character(s). Please input either of integers 1 or 2.");
                 }
             }
+
+            if (orientation === "1") {
+                var L_status = 0;
+                while (!L_status) {
+                    WScript.StdOut.Write("Please specify the length of the cylinders in millimeters (mm): ");
+                    var L = readFloat() / 1000;
+                    if (typeof L === "number" && 0 < L) {
+                        L_status = 1;
+                    } else {
+                        WScript.StdOut.WriteLine("Please only put positive numbers.");
+                    }
+                }
+            }
+
+
 
             var R1_status = 0;
             while (!R1_status) {
@@ -100,6 +117,8 @@ while (!contact_type_status) {
                     WScript.StdOut.WriteLine("Please only put positive numbers.");
                 }
             }
+
+            var Rs = R1 * R2 / (R1 + R2);
 
             break;
         default:
@@ -263,7 +282,44 @@ if (contact_type === "1" || contact_type === "2") {
 
 
 
+} else if (contact_type === "3") {
+    var d = force / (2 * R1 * Es);
+    var P_max = d * Es / (Rs * Math.PI);
+} else if (contact_type === "4") {
+    switch (orientation) {
+        case "1":
+            var b = 2 * Math.sqrt(4 * force * Rs / (Math.PI * L * Es));
+            var d = Math.pow((b / 2), 2) / Rs;
+            var P_max = 4 * force / (MAth.PI * b * L);
+            break;
+
+        case "2":
+            if (R1 == R2) {
+                var a = Math.pow((3 * force * Rs / (4 * Es)), (1 / 3));
+                var d = Math.pow(a, 2) / Rs;
+                var P_max = 3 * force / (2 * Math.PI * Math.pow(a, 2));
+                var safety_factor = sigma / P_max;
+
+                WScript.StdOut.WriteLine("| Symbol | Unit |   Value  | Description                                    |");
+                WScript.StdOut.WriteLine("|:------:|:----:|:--------:|------------------------------------------------|");
+                WScript.StdOut.WriteLine("|    a   |  mm  | " + printFloat(a * 1E3) + " | Major radius of the contact ellipse            |");
+                WScript.StdOut.WriteLine("|    d   |  mm  | " + printFloat(d * 1E3) + " | Total deformation / indentation / displacement |");
+                WScript.StdOut.WriteLine("|  P_max |  MPa | " + printFloat(P_max / 1E6) + " | Maximum contact pressure                       |");
+                WScript.StdOut.WriteLine("|   SF   |  --- | " + Math.floor(safety_factor) + "        | Safety factor                                  |");
+
+            } else {
+
+            }
+
+            break;
+
+        default:
+            break;
+    }
+
 } else {
+
+}
 
 }
 
