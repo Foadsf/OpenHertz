@@ -25,5 +25,12 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+### PowerShell ###
+# Exclude packaged modules
+*.zip
+
+# Exclude .NET assemblies from source
+*.dll
+
 # testing
-test.js
+test.ps1

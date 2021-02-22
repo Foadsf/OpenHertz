@@ -23,7 +23,6 @@ OpenHertz is a Free, Libre, and Open Source software for Hertzian contact calcul
 
 ## FAQ:
 
-- Why using a legacy language like Microsoft’s Jscript? Of course, it is practically a dead language; it is preinstalled on almost all corporate machines, at least in the field of mechanical engineering, who almost exclusively use Windows operating systems.
 - Why not supporting the imperial system of units? Please grow up, US!
 - Why not have a graphical user interface (GUI)? Who knows, maybe in the future it will be added
-
+- Why writing a software in PowerShell? It seems like the only scripting language included in all the Windows corporate machines that the potential audience of this software use.
