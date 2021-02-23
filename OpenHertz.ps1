@@ -10,7 +10,8 @@ $host.ui.RawUI.WindowTitle = "OpenHertz 0.0.2"
        |_|                                        
 "
 
-"Welcome to OpenHertz v 0.0.2 a Free Hertzian contact calculator for Windows written in pure JScript. If there are any issues please report them on https://github.com/Foadsf/OpenHertz/"
+"Welcome to OpenHertz v 0.0.2 a Free Hertzian contact calculator for Windows." 
+"If there are any issues please report them on github.com/Foadsf/OpenHertz/"
 "Press Ctrl + c to terminate and quite"
 "-----------------------------------------------------------"
 "OpenHertz can calculate the below contact types:"
@@ -49,10 +50,10 @@ switch ($contact_type) {
     Sphere_Plane {
         'You selected (1) for a Sphere-Plane contact.'
         do {
-            try { [decimal]$radius = (Read-Host 'Please specify the radius of the sphere in millimeters (mm)') / 1E3 }
+            try { [decimal]$radius_s = (Read-Host 'Please specify the radius of the sphere in millimeters (mm)') / 1E3 }
             catch { "Please only put positive numbers." }
             
-        } until ($radius -is [decimal] -and $radius -gt 0)
+        } until ($radius_s -is [decimal] -and $radius_s -gt 0)
 
         Break
     }
@@ -169,11 +170,59 @@ else {
     } until ($yield_strength_2 -is [decimal] -and $yield_strength_2 -gt 0)
 
     $yield_strength_2 = $yield_strength_2 * 1E6
+
+    $yield_strength = [Math]::Min($yield_strength_1, $yield_strength_2)
     
 }
 "-----------------------------------------------------------"
+
+do {
+    try { [decimal]$force = Read-Host 'Please specify the normal contact force in Newtons (N)' }
+    catch { "Please only put positive numbers." }
+    
+} until ($force -is [decimal] -and $force -gt 0)
+
+"-----------------------------------------------------------"
+
+function convertFloat {
+    param (
+        [decimal]$inputFloat
+    )
+
+    $descimals = 3
+    $order = [Math]::Floor([Math]::Log10($inputFloat))
+
+    if (0 -gt $order) {
+        $placeHolder = ""
+    } else {
+        $placeHolder = "0"        
+    }
+    
+    return ([Math]::Round($inputFloat / [Math]::Pow(10, ($order - $descimals))) / [Math]::Pow(10, $descimals)), "E", $placeHolder, $order -join ""
+    
+}
+
+if ($contact_type -eq "Sphere_Plane" -or $contact_type -eq "Sphere_Sphere") {
+
+    [decimal]$contact_radius = [Math]::Pow((3 * $force * $radius_s / 4 / $elastic_modulus_s), (1 / 3))
+    [decimal]$indentation = [Math]::Pow($contact_radius, 2) / $radius_s
+    [decimal]$maximum_pressure = 3 * $force / 2 / [Math]::PI / [Math]::Pow($contact_radius, 2)
+    [decimal]$safety_facor = [Math]::Floor($yield_strength / $maximum_pressure)
+
+    "| Symbol | Unit |   Value  | Description                                    |"
+    "|:------:|:----:|:--------:|------------------------------------------------|"
+    Write-Host (-join("|    a   |  mm  | ", (convertFloat ($contact_radius * 1E3)), " | Major radius of the contact ellipse            |"))
+    Write-Host (-join("|    d   |  mm  | ", (convertFloat ($indentation * 1E3)), " | Total deformation / indentation / displacement |"))
+    Write-Host (-join("|  P_max |  MPa | ", (convertFloat ($maximum_pressure / 1E6)),  " | Maximum contact pressure                       |"))
+    Write-Host (-join("|   SF   |  --- | ", $safety_facor, "        | Safety factor                                  |"))
+    
+}
+
+
 
 
 "-----------------------------------------------------------"
 "Press any key to continue..."
 [void][System.Console]::ReadKey($true)
+
+
