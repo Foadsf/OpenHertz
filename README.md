@@ -1,9 +1,21 @@
 # OpenHertz
-OpenHertz is a Free, Libre, and Open Source software for Hertzian contact calculations on Windows, written in pure Jscript.
+OpenHertz is a Free, Libre, and Open Source software for Hertzian contact calculations on Windows, written in pure PowerShell.
+
+## Installation:
+
+- Download this repository in ZIP format and unarchive it somewhere on your computer. (in a directory where there are no spaced in the path)
+
+<!-- ![Download the zip](pics/download.png) -->
+
+<p align="center">
+  <img src="pics/download.png" width="350" title="Download the zip">
+</p>
+
+- Assign the `.ps1` files to PowerShell as described [here](https://www.top-password.com/blog/set-ps1-script-to-open-with-powershell-by-default/).
 
 ## Instructions:
 
-- Run the OpenHertz.bat
+- Run the `OpenHertz.ps1`
 - Choose the type of contact:
 
     * Sphere-Plane (R)
