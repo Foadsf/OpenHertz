@@ -1,5 +1,15 @@
 $host.ui.RawUI.WindowTitle = "OpenHertz 0.0.2"
 
+"  ____                   _    _           _       
+ /  __\                 | |  | |         | |      
+ | |  ||_ __   ___ _ __ | |__| | ___ _ __| |_ ____
+ | |  || '_ \ / _ \ '_ \|  __  |/ _ \ '__| __|_  /
+ | |__|| |_) |  __/ | | | |  | |  __/ |  | |_ / / 
+ \____/| .__/ \___|_| |_|_|  |_|\___|_|   \__/___|
+       | |                                        
+       |_|                                        
+"
+
 "Welcome to OpenHertz v 0.0.2 a Free Hertzian contact calculator for Windows written in pure JScript. If there are any issues please report them on https://github.com/Foadsf/OpenHertz/"
 "Press Ctrl + c to terminate and quite"
 "-----------------------------------------------------------"
