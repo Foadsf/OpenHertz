@@ -96,17 +96,17 @@ switch ($contact_type) {
                 
         #     } until ($radius_s -is [decimal] -and $radius_s -gt 0)
         # } else {
-            do {
-                try { [decimal]$radius_1 = Read-Host 'Please specify the radius of the first cylinder in millimeters (mm)' }
-                catch { "Please only put positive numbers." }
+        do {
+            try { [decimal]$radius_1 = Read-Host 'Please specify the radius of the first cylinder in millimeters (mm)' }
+            catch { "Please only put positive numbers." }
                 
-            } until ($radius_1 -is [decimal] -and $radius_1 -gt 0)
+        } until ($radius_1 -is [decimal] -and $radius_1 -gt 0)
     
-            do {
-                try { [decimal]$radius_2 = Read-Host 'Now specify the second radius in millimeters (mm)' }
-                catch { "Please only put positive numbers." }
+        do {
+            try { [decimal]$radius_2 = Read-Host 'Now specify the second radius in millimeters (mm)' }
+            catch { "Please only put positive numbers." }
                 
-            } until ($radius_2 -is [decimal] -and $radius_2 -gt 0)
+        } until ($radius_2 -is [decimal] -and $radius_2 -gt 0)
             
         # }
 
@@ -228,7 +228,8 @@ function convertFloat {
 
     if (0 -gt $order) {
         $placeHolder = ""
-    } else {
+    }
+    else {
         $placeHolder = "0"        
     }
     
@@ -245,10 +246,10 @@ if ($contact_type -eq "Sphere_Plane" -or $contact_type -eq "Sphere_Sphere") {
 
     "| Symbol | Unit |   Value  | Description                                    |"
     "|:------:|:----:|:--------:|------------------------------------------------|"
-    Write-Host (-join("|    a   |  mm  | ", (convertFloat ($contact_radius * 1E3)), " | Radius of the contact circle                   |"))
-    Write-Host (-join("|    d   |  mm  | ", (convertFloat ($indentation * 1E3)), " | Total deformation / indentation / displacement |"))
-    Write-Host (-join("|  P_max |  MPa | ", (convertFloat ($maximum_pressure / 1E6)),  " | Maximum contact pressure                       |"))
-    Write-Host (-join("|   SF   |  --- | ", $safety_facor, "        | Safety factor                                  |"))
+    Write-Host ( -join ("|    a   |  mm  | ", (convertFloat ($contact_radius * 1E3)), " | Radius of the contact circle                   |"))
+    Write-Host ( -join ("|    d   |  mm  | ", (convertFloat ($indentation * 1E3)), " | Total deformation / indentation / displacement |"))
+    Write-Host ( -join ("|  P_max |  MPa | ", (convertFloat ($maximum_pressure / 1E6)), " | Maximum contact pressure                       |"))
+    Write-Host ( -join ("|   SF   |  --- | ", $safety_facor, "        | Safety factor                                  |"))
     
 }
 
