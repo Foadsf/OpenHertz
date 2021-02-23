@@ -10,7 +10,7 @@ $host.ui.RawUI.WindowTitle = "OpenHertz 0.0.2"
        |_|                                        
 "
 
-"Welcome to OpenHertz v 0.0.2 a Free Hertzian contact calculator for Windows." 
+"Welcome to OpenHertz v 0.0.2 a Free Hertzian contact calculator." 
 "If there are any issues please report them on github.com/Foadsf/OpenHertz/"
 "Press Ctrl + c to terminate and quite"
 "-----------------------------------------------------------"
@@ -43,8 +43,6 @@ do {
     catch { "You have entered the wrong character(s). Please input an integer between 0 to 3." }
     
 } until ($contact_type -is [contactTypes])
-
-$contact_type
 
 switch ($contact_type) {
     Sphere_Plane {
@@ -81,11 +79,46 @@ switch ($contact_type) {
             catch { "Please only put positive numbers." }
             
         } until ($radius -is [decimal] -and $radius -gt 0)
-        # Break
+        Break
     }
-    # Cylinder_Cylinder {
-        
-    # }
+    Cylinder_Cylinder {
+        'You selected (3) for a Cylinder-Cylinder contact.'
+        # do {
+        #     try { [yesNo]$radius_same = Read-Host 'Are the two cylinders of the same radius (y/n)?' }
+        #     catch { "You put the wrong character(s). Please type y or n." }
+            
+        # } until ($radius_same -is [yesNo])
+
+        # if ($radius_same -eq "y") {
+        #     do {
+        #         try { [decimal]$radius_s = (Read-Host 'Please specify the radius of the cylinders in millimeters (mm)') / 1E3 }
+        #         catch { "Please only put positive numbers." }
+                
+        #     } until ($radius_s -is [decimal] -and $radius_s -gt 0)
+        # } else {
+            do {
+                try { [decimal]$radius_1 = Read-Host 'Please specify the radius of the first cylinder in millimeters (mm)' }
+                catch { "Please only put positive numbers." }
+                
+            } until ($radius_1 -is [decimal] -and $radius_1 -gt 0)
+    
+            do {
+                try { [decimal]$radius_2 = Read-Host 'Now specify the second radius in millimeters (mm)' }
+                catch { "Please only put positive numbers." }
+                
+            } until ($radius_2 -is [decimal] -and $radius_2 -gt 0)
+            
+        # }
+
+        Add-Type -TypeDefinition @"
+   public enum orientations
+   {
+    parallel,
+    perpendicular,
+    angeled
+   }
+"@
+    }
 }
 
 "-----------------------------------------------------------"
@@ -114,6 +147,7 @@ if ($material_same -eq "y") {
     } until ($poisson_ratio -is [decimal] -and $poisson_ratio -ge 0 -and 0.5 -ge $poisson_ratio)
 
     [decimal]$elastic_modulus_s = $elastic_modulus / 2 / (1 - [Math]::Pow($poisson_ratio, 2))
+
     
     do {
         try { [decimal]$yield_strength = Read-Host 'Please specify the Yield strength in MegaPascal (MPa)' }
@@ -211,7 +245,7 @@ if ($contact_type -eq "Sphere_Plane" -or $contact_type -eq "Sphere_Sphere") {
 
     "| Symbol | Unit |   Value  | Description                                    |"
     "|:------:|:----:|:--------:|------------------------------------------------|"
-    Write-Host (-join("|    a   |  mm  | ", (convertFloat ($contact_radius * 1E3)), " | Major radius of the contact ellipse            |"))
+    Write-Host (-join("|    a   |  mm  | ", (convertFloat ($contact_radius * 1E3)), " | Radius of the contact circle                   |"))
     Write-Host (-join("|    d   |  mm  | ", (convertFloat ($indentation * 1E3)), " | Total deformation / indentation / displacement |"))
     Write-Host (-join("|  P_max |  MPa | ", (convertFloat ($maximum_pressure / 1E6)),  " | Maximum contact pressure                       |"))
     Write-Host (-join("|   SF   |  --- | ", $safety_facor, "        | Safety factor                                  |"))
