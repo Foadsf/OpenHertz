@@ -38,6 +38,15 @@ Add-Type -TypeDefinition @"
    }
 "@
 
+Add-Type -TypeDefinition @"
+public enum orientations
+{
+ parallel,
+ perpendicular,
+ angeled
+}
+"@ 
+
 do {
     try { [contactTypes]$contact_type = Read-Host 'Please select the contact type' }
     catch { "You have entered the wrong character(s). Please input an integer between 0 to 3." }
@@ -64,10 +73,10 @@ switch ($contact_type) {
         } until ($radius_1 -is [decimal] -and $radius_1 -gt 0)
 
         do {
-            try { [decimal]$radius_2 = Read-Host 'Now specify the second radius in millimeters (mm)' }
-            catch { "Please only put positive numbers." }
+            try { [decimal]$radius_2 = Read-Host 'Now specify the second radius in millimeters (mm) [can be a negative number]' }
+            catch { "Please only put non-zero values." }
             
-        } until ($radius_2 -is [decimal] -and $radius_2 -gt 0)
+        } until ($radius_2 -is [decimal] -and $radius_2 -ne 0)
         
         [decimal]$radius_s = $radius_1 * $radius_2 / 2 / ($radius_1 + $radius_2) / 1E3
         Break
@@ -83,42 +92,63 @@ switch ($contact_type) {
     }
     Cylinder_Cylinder {
         'You selected (3) for a Cylinder-Cylinder contact.'
-        # do {
-        #     try { [yesNo]$radius_same = Read-Host 'Are the two cylinders of the same radius (y/n)?' }
-        #     catch { "You put the wrong character(s). Please type y or n." }
-            
-        # } until ($radius_same -is [yesNo])
+        "OpenHertz can calculate the contact between two cylinders for the below relative orientations:"
+        "  (0) Parallel"
+        "  (1) Perpendicular"
+        "  (2) Angled"
 
-        # if ($radius_same -eq "y") {
-        #     do {
-        #         try { [decimal]$radius_s = (Read-Host 'Please specify the radius of the cylinders in millimeters (mm)') / 1E3 }
-        #         catch { "Please only put positive numbers." }
-                
-        #     } until ($radius_s -is [decimal] -and $radius_s -gt 0)
-        # } else {
         do {
-            try { [decimal]$radius_1 = Read-Host 'Please specify the radius of the first cylinder in millimeters (mm)' }
-            catch { "Please only put positive numbers." }
+            try { [orientations]$orientation = Read-Host 'Please select the relative orientation of the cylinders' }
+            catch { "You have entered the wrong character(s). Please input an integer between 0 to 3." }
+            
+        } until ($orientation -is [orientations])
+
+        do {
+            try { [yesNo]$radius_same = Read-Host 'Are the two cylinders of the same radius (y/n)?' }
+            catch { "You put the wrong character(s). Please type y or n." }
+            
+        } until ($radius_same -is [yesNo])
+
+        if ($radius_same -eq "y") {
+            do {
+                try { [decimal]$radius_s = (Read-Host 'Please specify the radius of the cylinders in millimeters (mm)') / 1E3 }
+                catch { "Please only put positive numbers." }
                 
-        } until ($radius_1 -is [decimal] -and $radius_1 -gt 0)
+            } until ($radius_s -is [decimal] -and $radius_s -gt 0)
+
+            if ($orientation -eq "perpendicular") {
+                [bool]$crossed_identical_cylinders = $true
+            }
+        }
+        else {
+            do {
+                try { [decimal]$radius_1 = (Read-Host 'Please specify the radius of the first cylinder in millimeters (mm)') * 1E3 }
+                catch { "Please only put positive numbers." }
+                
+            } until ($radius_1 -is [decimal] -and $radius_1 -gt 0)
     
-        do {
-            try { [decimal]$radius_2 = Read-Host 'Now specify the second radius in millimeters (mm)' }
-            catch { "Please only put positive numbers." }
+            do {
+                try { [decimal]$radius_2 = (Read-Host 'Now specify the second radius in millimeters (mm) [can be a negative number]') * 1E3 }
+                catch { "Please only put non-zero values" }
                 
-        } until ($radius_2 -is [decimal] -and $radius_2 -gt 0)
-            
-        # }
+            } until ($radius_2 -is [decimal] -and $radius_2 -ne 0)
 
-        Add-Type -TypeDefinition @"
-   public enum orientations
-   {
-    parallel,
-    perpendicular,
-    angeled
-   }
-"@
+            [decimal]$radius_s = $radius_1 * $radius_2 / 2 / ($radius_1 + $radius_2)
+            
+        }
+
+
     }
+}
+
+if ($contact_type -eq "Cylinder_Plane" -or ($contact_type -eq "Cylinder_Cylinder" -and $orientation -eq "parallel")) {
+
+    do {
+        try { [decimal]$cylinder_length = (Read-Host 'Now specify the length of the cylinder(s) in millimeters (mm)') * 1E3 }
+        catch { "Please only put positive numbers." }
+        
+    } until ($cylinder_length -is [decimal] -and $cylinder_length -gt 0)
+
 }
 
 "-----------------------------------------------------------"
@@ -237,7 +267,7 @@ function convertFloat {
     
 }
 
-if ($contact_type -eq "Sphere_Plane" -or $contact_type -eq "Sphere_Sphere") {
+if ($contact_type -eq "Sphere_Plane" -or $contact_type -eq "Sphere_Sphere" -or $crossed_identical_cylinders) {
 
     [decimal]$contact_radius = [Math]::Pow((3 * $force * $radius_s / 4 / $elastic_modulus_s), (1 / 3))
     [decimal]$indentation = [Math]::Pow($contact_radius, 2) / $radius_s
@@ -250,6 +280,28 @@ if ($contact_type -eq "Sphere_Plane" -or $contact_type -eq "Sphere_Sphere") {
     Write-Host ( -join ("|    d   |  mm  | ", (convertFloat ($indentation * 1E3)), " | Total deformation / indentation / displacement |"))
     Write-Host ( -join ("|  P_max |  MPa | ", (convertFloat ($maximum_pressure / 1E6)), " | Maximum contact pressure                       |"))
     Write-Host ( -join ("|   SF   |  --- | ", $safety_facor, "        | Safety factor                                  |"))
+    
+}
+elseif ($contact_type -eq "Cylinder_Plane") {
+    [decimal]$contact_width =
+    [decimal]$indentation = $force / 2 / $radius / $elastic_modulus_s / $cylinder_length
+    [decimal]$maximum_pressure = $indentation / $elastic_modulus_s / [Math]::PI
+    [decimal]$safety_facor = [Math]::Floor($yield_strength / $maximum_pressure)
+}
+elseif ($contact_type -eq "Cylinder_Cylinder") {
+
+    switch ($orientation) {
+        parallel {  
+            [decimal]$indentation = 4 * $force / $elastic_modulus_s / $cylinder_length / [Math]::PI
+            [decimal]$contact_width = [Math]::Sqrt($radius_s * $indentation)
+            # [decimal]$maximum_pressure = [Math]::Sqrt($elastic_modulus_s * $force / [Math]::PI / $cylinder_length / $radius_s)
+            [decimal]$maximum_pressure = 2 * $force / [Math]::PI / $contact_width / $cylinder_length
+            [decimal]$safety_facor = [Math]::Floor($yield_strength / $maximum_pressure)
+            Break
+        }
+        Default {}
+    }
+    
     
 }
 
