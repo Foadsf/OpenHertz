@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title>formDemo.html</title>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpg" href="pics/favicon.jpg" />
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
+</head>
+
+<body>
+    <h1>OpenHertz 0.0.4</h1>
+    <p>
+        Welcome to OpenHertz v 0.0.4 a Free Hertzian contact calculator.
+        If there are any issues please report them on <a href="https://github.com/Foadsf/OpenHertz">the GitHub
+            repository</a>.
+    </p>
+    <form>
+        <fieldset>
+            <legend>Geometry</legend>
+            <p>
+                <label>Contact type</label>
+                <select id="contactTypeList" onchange="document.getElementById('contactType').src = this.value">
+                    <option value="pics/SpherePlane.PNG">Sphere - Plane</option>
+                    <option value="pics/SphereSphere.PNG">Sphere - Sphere</option>
+                    <option value="pics/CylinderPlane.PNG">Cylinder - Plane</option>
+                    <option value="4">Cylinder - Cylinder</option>
+                </select>
+            </p>
+            <p style="text-align:center;">
+                <!-- <img src="pics/SpherePlane.PNG" alt="Contact type" height="200"> -->
+                <img id="contactType" src="pics/SpherePlane.PNG" alt="Contact type" height="200">
+            </p>
+        </fieldset>
+        <fieldset>
+            <legend>Material</legend>
+            <p>
+                <label>Same materials</label>
+                <select id="myList">
+                    <option value="1">yes</option>
+                    <option value="2">n0</option>
+                </select>
+            </p>
+        </fieldset>
+    </form>
+</body>
+
+</html>

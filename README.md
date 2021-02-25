@@ -1,9 +1,7 @@
 # OpenHertz
-OpenHertz is a cross-platform Free, Libre, and Open Source Software (FLOSS) for Hertzian contact calculations, written in pure PowerShell.
+OpenHertz is a cross-platform Free, Libre, and Open Source Software (FLOSS) for Hertzian contact calculations.
 
 ## Installation:
-
-### Windows:
 
 - Download this repository in ZIP format and unarchive it somewhere on your computer. (in a directory where there are no spaced in the path)
 
@@ -16,10 +14,6 @@ OpenHertz is a cross-platform Free, Libre, and Open Source Software (FLOSS) for 
 
 - Assign the `.ps1` files to PowerShell as described [here](https://www.top-password.com/blog/set-ps1-script-to-open-with-powershell-by-default/).
 
-### macOS:
-
-- Install HomeBrew from [here](https://docs.brew.sh/Installation)
-- Install PowerShell from [here](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-macos?view=powershell-7.1) using `brew cask install powershell`
 
 ## Instructions:
 
