@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+    <title>OpenHertz</title>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpg" href="pics/favicon.jpg" />
+    <link rel="stylesheet" href="styles.css">
+    <!-- <script type="text/javascript" src="scripts.js"></script> -->
+
+</head>
+
+<body>
+
+    <h1>OpenHertz</h1>
+    <p>
+        Welcome to OpenHertz v 0.0.5 a Free Hertzian contact calculator.
+        If there are any issues please report them on <a href="https://github.com/Foadsf/OpenHertz" target="_blank"
+            rel="noopener noreferrer">the GitHub
+            repository</a>.
+    </p>
+    <form>
+        <fieldset>
+            <legend>Geometry</legend>
+
+
+            <style type="text/css">
+                .tg {
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                }
+
+                .tg td {
+                    border-color: black;
+                    border-style: solid;
+                    border-width: 1px;
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    overflow: hidden;
+                    padding: 10px 5px;
+                    word-break: normal;
+                }
+
+                .tg th {
+                    border-color: black;
+                    border-style: solid;
+                    border-width: 1px;
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    font-weight: normal;
+                    overflow: hidden;
+                    padding: 10px 5px;
+                    word-break: normal;
+                }
+
+                .tg .tg-zv4m {
+                    border-color: #ffffff;
+                    text-align: left;
+                    vertical-align: top;
+                    min-width: 350px;
+                    width: 400px;
+                }
+
+                .tg .tg-8jgo {
+                    border-color: #ffffff;
+                    text-align: center;
+                    vertical-align: top
+                }
+            </style>
+            <table class="tg" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="tg-zv4m">
+                            <p>
+                                <label>Contact type</label>
+                                <!-- <select id="contactTypeList" onchange="document.getElementById('contactType').src = this.value"> -->
+                                <select id="contactTypeList" onchange="contactTypeFun(this.value)">
+                                    <!-- <option value="pics/SpherePlane.PNG">Sphere - Plane</option>
+                                <option value="pics/SphereSphere.PNG">Sphere - Sphere</option>
+                                <option value="pics/CylinderPlane.PNG">Cylinder - Plane</option> -->
+                                    <option value="1">Sphere - Plane</option>
+                                    <option value="2">Sphere - Sphere</option>
+                                    <option value="3">Cylinder - Plane</option>
+                                    <option value="4">Cylinder - Cylinder</option>
+                                </select>
+                            </p>
+                            <p id="orientationList" style="display: none">
+                                <label>Orientation</label>
+                                <!-- <select onchange="document.getElementById('contactType').src = this.value"> -->
+                                <select id="OrientationSelector" onchange="orientationFun(this.value)">
+                                    <!-- <option value="pics/CylinderCylinderPerpendicular.PNG">Perpendicular</option>
+                                <option value="pics/CylinderCylinderParallel.PNG">Parallel</option> -->
+                                    <option value="1">Perpendicular</option>
+                                    <option value="2">Parallel</option>
+                                    <!-- <option value="pics/CylinderPlane.PNG">Angled</option> -->
+                                </select>
+                            </p>
+                        </th>
+                        <th class="tg-8jgo" rowspan="2">
+                            <p style="text-align:center;">
+                                <!-- <img src="pics/SpherePlane.PNG" alt="Contact type" height="200"> -->
+                                <img id="contactType" src="pics/SpherePlane.PNG" alt="Contact type" height="200">
+                            </p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="tg-zv4m">
+                            <p>
+                                <label>First radius (mm)</label>
+                                <input title="Please enter a positive number" type="number"
+                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="10.00">
+                            </p>
+                            <p id="secondRadius" style="display: none">
+                                <label>Second radius (mm)</label>
+                                <input title="Please enter a positive number" type="number"
+                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="20.00">
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+
+
+
+        </fieldset>
+        <fieldset>
+            <legend>Material</legend>
+            <!-- <p>
+                <label>Same materials</label>
+                <select id="myList">
+                    <option value="1">yes</option>
+                    <option value="2">no</option>
+                </select>
+            </p> -->
+
+            <p>
+                <style type="text/css">
+                    .tg {
+                        border-collapse: collapse;
+                        border-spacing: 0;
+                    }
+
+                    .tg td {
+                        border-color: black;
+                        border-style: solid;
+                        border-width: 1px;
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                        overflow: hidden;
+                        padding: 10px 5px;
+                        word-break: normal;
+                    }
+
+                    .tg th {
+                        border-color: black;
+                        border-style: solid;
+                        border-width: 1px;
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                        font-weight: normal;
+                        overflow: hidden;
+                        padding: 10px 5px;
+                        word-break: normal;
+                    }
+
+                    .tg .tg-baqh {
+                        text-align: center;
+                        vertical-align: top
+                    }
+
+                    .tg .tg-73oq {
+                        border-color: #000000;
+                        text-align: left;
+                        vertical-align: top;
+                        min-width: 170px;
+                        width: 200px;
+                        /* max-width: 200px; */
+                    }
+
+                    .tg .tg-6qw1 {
+                        background-color: #c0c0c0;
+                        text-align: center;
+                        vertical-align: top
+                    }
+
+                    .tg .tg-y6fn {
+                        background-color: #c0c0c0;
+                        text-align: left;
+                        vertical-align: top
+                    }
+                </style>
+            <table class="tg" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="tg-73oq"></th>
+                        <th class="tg-6qw1">First material</th>
+                        <th class="tg-6qw1">Second Material</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tg-y6fn">Young's modulus E (GPa)</td>
+                        <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="200"
+                                pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
+                        <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="200"
+                                pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-y6fn">Poisson's ratio 𝜈</td>
+                        <td class="tg-baqh"><input title="Please enter a positive number below 0.5" type="number"
+                                value="0.3" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" max="0.5"></td>
+                        <td class="tg-baqh"><input title="Please enter a positive number below 0.5" type="number"
+                                value="0.3" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" max="0.5"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-y6fn">Yield strength σ<sub>Y</sub> (MPa)</td>
+                        <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="400"
+                                pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
+                        <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="400"
+                                pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
+                    </tr>
+                </tbody>
+            </table>
+            </p>
+        </fieldset>
+        <fieldset>
+            <legend>Results</legend>
+        </fieldset>
+    </form>
+    <script type="text/javascript" src="scripts.js"></script>
+    <!-- <script>
+        function myFunction() {
+            document.getElementById('contactType').src = document.getElementById("contactTypeList").value;
+        }
+    </script> -->
+
+</body>
+
+</html>
