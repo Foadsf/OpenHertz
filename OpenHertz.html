@@ -2,14 +2,16 @@
 <html lang="en">
 
 <head>
-    <title>formDemo.html</title>
+    <title>OpenHertz</title>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/jpg" href="pics/favicon.jpg" />
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js"></script>
+    <!-- <script type="text/javascript" src="scripts.js"></script> -->
+
 </head>
 
 <body>
+
     <h1>OpenHertz 0.0.4</h1>
     <p>
         Welcome to OpenHertz v 0.0.4 a Free Hertzian contact calculator.
@@ -21,16 +23,39 @@
             <legend>Geometry</legend>
             <p>
                 <label>Contact type</label>
-                <select id="contactTypeList" onchange="document.getElementById('contactType').src = this.value">
-                    <option value="pics/SpherePlane.PNG">Sphere - Plane</option>
+                <!-- <select id="contactTypeList" onchange="document.getElementById('contactType').src = this.value"> -->
+                <select id="contactTypeList" onchange="contactTypeFun(this.value)">
+                    <!-- <option value="pics/SpherePlane.PNG">Sphere - Plane</option>
                     <option value="pics/SphereSphere.PNG">Sphere - Sphere</option>
-                    <option value="pics/CylinderPlane.PNG">Cylinder - Plane</option>
+                    <option value="pics/CylinderPlane.PNG">Cylinder - Plane</option> -->
+                    <option value="1">Sphere - Plane</option>
+                    <option value="2">Sphere - Sphere</option>
+                    <option value="3">Cylinder - Plane</option>
                     <option value="4">Cylinder - Cylinder</option>
+                </select>
+            </p>
+            <p id="orientationList" style="display: none">
+                <label>Orientation</label>
+                <!-- <select onchange="document.getElementById('contactType').src = this.value"> -->
+                <select id="OrientationSelector" onchange="orientationFun(this.value)">
+                    <!-- <option value="pics/CylinderCylinderPerpendicular.PNG">Perpendicular</option>
+                    <option value="pics/CylinderCylinderParallel.PNG">Parallel</option> -->
+                    <option value="1">Perpendicular</option>
+                    <option value="2">Parallel</option>
+                    <!-- <option value="pics/CylinderPlane.PNG">Angled</option> -->
                 </select>
             </p>
             <p style="text-align:center;">
                 <!-- <img src="pics/SpherePlane.PNG" alt="Contact type" height="200"> -->
                 <img id="contactType" src="pics/SpherePlane.PNG" alt="Contact type" height="200">
+            </p>
+            <p>
+                <label>First radius (mm)</label>
+                <input title="Please enter a positive number" type="number" step="0.001" min="0">
+            </p>
+            <p id="secondRadius" style="display: none">
+                <label>Second radius (mm)</label>
+                <input title="Please enter a positive number" type="number" step="0.001" min="0">
             </p>
         </fieldset>
         <fieldset>
@@ -44,6 +69,13 @@
             </p>
         </fieldset>
     </form>
+    <script type="text/javascript" src="scripts.js"></script>
+    <!-- <script>
+        function myFunction() {
+            document.getElementById('contactType').src = document.getElementById("contactTypeList").value;
+        }
+    </script> -->
+
 </body>
 
 </html>
