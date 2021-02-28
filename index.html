@@ -107,13 +107,15 @@
                         <td class="tg-zv4m">
                             <p>
                                 <label>First radius (mm)</label>
-                                <input title="Please enter a positive number" type="number"
-                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="10.00">
+                                <input title="Please enter a positive number" id="firstRadius" type="number"
+                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="10.00"
+                                    onchange="updateresults()">
                             </p>
                             <p id="secondRadius" style="display: none">
                                 <label>Second radius (mm)</label>
-                                <input title="Please enter a positive number" type="number"
-                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="20.00">
+                                <input title="Please enter a positive number" id="secondRadiusValue" type="number"
+                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="20.00"
+                                    onchange="updateresults()">
                             </p>
                         </td>
                     </tr>
@@ -200,17 +202,21 @@
                 <tbody>
                     <tr>
                         <td class="tg-y6fn">Young's modulus E (GPa)</td>
-                        <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="200"
-                                pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
-                        <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="200"
-                                pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
+                        <td class="tg-baqh"><input id="firstElastic" title="Please enter a positive number"
+                                type="number" value="200" pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"
+                                onchange="updateresults()"></td>
+                        <td class="tg-baqh"><input id="secondElastic" title="Please enter a positive number"
+                                type="number" value="200" pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"
+                                onchange="updateresults()"></td>
                     </tr>
                     <tr>
                         <td class="tg-y6fn">Poisson's ratio 𝜈</td>
-                        <td class="tg-baqh"><input title="Please enter a positive number below 0.5" type="number"
-                                value="0.3" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" max="0.5"></td>
-                        <td class="tg-baqh"><input title="Please enter a positive number below 0.5" type="number"
-                                value="0.3" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" max="0.5"></td>
+                        <td class="tg-baqh"><input id="firstPoisson" title="Please enter a positive number below 0.5"
+                                type="number" value="0.3" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" max="0.5"
+                                onchange="updateresults()"></td>
+                        <td class="tg-baqh"><input id="secondPoisson" title="Please enter a positive number below 0.5"
+                                type="number" value="0.3" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" max="0.5"
+                                onchange="updateresults()"></td>
                     </tr>
                     <tr>
                         <td class="tg-y6fn">Yield strength σ<sub>Y</sub> (MPa)</td>
@@ -225,6 +231,116 @@
         </fieldset>
         <fieldset>
             <legend>Results</legend>
+
+            <p>
+                <style type="text/css">
+                    .tg {
+                        border-collapse: collapse;
+                        border-spacing: 0;
+                    }
+
+                    .tg td {
+                        border-color: black;
+                        border-style: solid;
+                        border-width: 1px;
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                        overflow: hidden;
+                        padding: 10px 5px;
+                        word-break: normal;
+                    }
+
+                    .tg th {
+                        border-color: black;
+                        border-style: solid;
+                        border-width: 1px;
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                        font-weight: normal;
+                        overflow: hidden;
+                        padding: 10px 5px;
+                        word-break: normal;
+                    }
+
+                    .tg .tg-uqo3 {
+                        background-color: #efefef;
+                        text-align: center;
+                        vertical-align: top
+                    }
+
+                    .tg .tg-baqh {
+                        text-align: center;
+                        vertical-align: top
+                    }
+
+                    .tg .tg-c3ow {
+                        border-color: inherit;
+                        text-align: center;
+                        vertical-align: top
+                    }
+
+                    .tg .tg-kftd {
+                        background-color: #efefef;
+                        text-align: left;
+                        vertical-align: top
+                    }
+
+                    .tg .tg-0lax {
+                        text-align: left;
+                        vertical-align: top
+                    }
+
+                    .tg .tg-y698 {
+                        background-color: #efefef;
+                        border-color: inherit;
+                        text-align: left;
+                        vertical-align: top;
+                        min-width: 240px;
+                        width: 260px
+                    }
+                </style>
+            <table class="tg" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="tg-0lax"></th>
+                        <th class="tg-uqo3">Value</th>
+                        <th class="tg-uqo3">Equation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="effectiveRadius" style="display: none">
+                        <td class="tg-y698">Effective radius R<sub>*</sub> (mm)</td>
+                        <td class="tg-c3ow" id="effectiveRadiusValue"></td>
+                        <td class="tg-c3ow"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-y698">Effective Elasticity E<sub>*</sub> (GPa)</td>
+                        <td class="tg-c3ow" id="effectiveElasticityValue"></td>
+                        <td class="tg-c3ow"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-y698">Radius of the contact area a (mm)</td>
+                        <td class="tg-c3ow"></td>
+                        <td class="tg-c3ow"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-y698">Total deformation d (mm)</td>
+                        <td class="tg-c3ow"></td>
+                        <td class="tg-c3ow"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-kftd">Maximum contact pressure P<sub>max</sub> (MPa)</td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-kftd">Safety factor SF</td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh"></td>
+                    </tr>
+                </tbody>
+            </table>
+            </p>
         </fieldset>
     </form>
     <script type="text/javascript" src="scripts.js"></script>
