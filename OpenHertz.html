@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en-US">
 
 <head>
     <title>OpenHertz</title>
@@ -56,7 +56,9 @@
                 .tg .tg-zv4m {
                     border-color: #ffffff;
                     text-align: left;
-                    vertical-align: top
+                    vertical-align: top;
+                    min-width: 350px;
+                    width: 400px;
                 }
 
                 .tg .tg-8jgo {
@@ -105,11 +107,13 @@
                         <td class="tg-zv4m">
                             <p>
                                 <label>First radius (mm)</label>
-                                <input title="Please enter a positive number" type="number" step="0.001" min="0">
+                                <input title="Please enter a positive number" type="number"
+                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="10.00">
                             </p>
                             <p id="secondRadius" style="display: none">
                                 <label>Second radius (mm)</label>
-                                <input title="Please enter a positive number" type="number" step="0.001" min="0">
+                                <input title="Please enter a positive number" type="number"
+                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="20.00">
                             </p>
                         </td>
                     </tr>
@@ -168,7 +172,7 @@
                         border-color: #000000;
                         text-align: left;
                         vertical-align: top;
-                        /* min-width: 20px; */
+                        min-width: 170px;
                         width: 200px;
                         /* max-width: 200px; */
                     }
@@ -196,22 +200,31 @@
                 <tbody>
                     <tr>
                         <td class="tg-y6fn">Young's modulus E (GPa)</td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="200"
+                                pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
+                        <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="200"
+                                pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
                     </tr>
                     <tr>
                         <td class="tg-y6fn">Poisson's ratio 𝜈</td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh"><input title="Please enter a positive number below 0.5" type="number"
+                                value="0.3" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" max="0.5"></td>
+                        <td class="tg-baqh"><input title="Please enter a positive number below 0.5" type="number"
+                                value="0.3" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" max="0.5"></td>
                     </tr>
                     <tr>
-                        <td class="tg-y6fn">Yield strength</td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh"></td>
+                        <td class="tg-y6fn">Yield strength σ<sub>Y</sub> (MPa)</td>
+                        <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="400"
+                                pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
+                        <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="400"
+                                pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
                     </tr>
                 </tbody>
             </table>
             </p>
+        </fieldset>
+        <fieldset>
+            <legend>Results</legend>
         </fieldset>
     </form>
     <script type="text/javascript" src="scripts.js"></script>
