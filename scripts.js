@@ -48,9 +48,19 @@ function orientationFun(inputOption) {
 
 function calculateEffectiveRadius() {
     var fradius = parseFloat(document.getElementById("firstRadius").value);
-    var sradius = parseFloat(document.getElementById("secondRadiusValue").value);
-    var calculationResult = fradius * sradius / (fradius + sradius);
+
+    var localContactType = document.getElementById("contactTypeList").value;
+
+    if (localContactType == "1" || localContactType == "3") {
+        var calculationResult = fradius;
+    } else {
+        var sradius = parseFloat(document.getElementById("secondRadiusValue").value);
+        var calculationResult = fradius * sradius / (fradius + sradius);
+    }
+
+
     document.getElementById("effectiveRadiusValue").innerHTML = calculationResult.toFixed(2);
+    return calculationResult;
 }
 
 function calculateEffectiveElasticity() {
@@ -60,9 +70,41 @@ function calculateEffectiveElasticity() {
     var sPoisson = parseFloat(document.getElementById("secondPoisson").value);
     var calculationResult = felastic * selastic / (selastic * (1 - Math.pow(fPoisson, 2)) + felastic * (1 - Math.pow(sPoisson, 2)));
     document.getElementById("effectiveElasticityValue").innerHTML = calculationResult.toFixed(0);
+    return calculationResult;
 }
 
-function updateresults() {
-    calculateEffectiveRadius();
-    calculateEffectiveElasticity()
+function calculateContactRadius() {
+    var effectiveElasticity = calculateEffectiveElasticity() * 1E9;
+    var effectiveRadius = calculateEffectiveRadius() / 1E3;
+    var force = parseFloat(document.getElementById("forceValue").value);
+    var calculationResult = Math.pow(3 * force * effectiveRadius / 4 / effectiveElasticity, (1 / 3)) * 1E6;
+    document.getElementById("contactRadius").innerHTML = calculationResult.toFixed(2);
+    return calculationResult;
+}
+
+
+function calculateIndentation() {
+    var effectiveRadius = calculateEffectiveRadius() * 1E3;
+    var contactRadius = calculateContactRadius();
+    var calculationResult = Math.pow(contactRadius, 2) / effectiveRadius;
+    document.getElementById("indentation").innerHTML = calculationResult.toFixed(2);
+    return calculationResult;
+}
+
+// 3 * $force / 2 / [Math]::PI / [Math]::Pow($contact_radius, 2)
+
+function calculateMaximumPressure() {
+    var contactRadius = calculateContactRadius() / 1E6;
+    var force = parseFloat(document.getElementById("forceValue").value);
+    var calculationResult = 3 * force / 2 / Math.PI / Math.pow(contactRadius, 2) / 1E6;
+    document.getElementById("maximumPressure").innerHTML = calculationResult.toFixed(0);
+    return calculationResult;
+}
+
+function updateResults() {
+    // calculateEffectiveRadius();
+    // calculateEffectiveElasticity();
+    // calculateContactRadius();
+    calculateIndentation()
+    calculateMaximumPressure()
 }
