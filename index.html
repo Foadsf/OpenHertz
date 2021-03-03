@@ -117,12 +117,7 @@
                                     pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="20.00"
                                     onchange="updateResults()">
                             </p>
-                            <p id="Force">
-                                <label>Force (N)</label>
-                                <input title="Please enter a positive number" id="forceValue" type="number"
-                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="20.00"
-                                    onchange="updateResults()">
-                            </p>
+
                         </td>
                     </tr>
                 </thead>
@@ -131,6 +126,16 @@
 
 
         </fieldset>
+
+        <fieldset>
+            <legend>Load</legend>
+            <p id="Force">
+                <label>Normal force (N)</label>
+                <input title="Please enter a positive number" id="forceValue" type="number"
+                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="20.00" onchange="updateResults()">
+            </p>
+        </fieldset>
+
         <fieldset>
             <legend>Material</legend>
             <!-- <p>
@@ -317,12 +322,20 @@
                     <tr id="effectiveRadius" style="display: none">
                         <td class="tg-y698">Effective radius R<sub>*</sub> (mm)</td>
                         <td class="tg-c3ow" id="effectiveRadiusValue"></td>
-                        <td class="tg-c3ow"></td>
+                        <td class="tg-c3ow">
+                            <p style="text-align:center;">
+                                <img src="pics/effectiveRadius.PNG" alt="Effective radius" height="40">
+                            </p>
+                        </td>
                     </tr>
                     <tr>
                         <td class="tg-y698">Effective Elasticity E<sub>*</sub> (GPa)</td>
                         <td class="tg-c3ow" id="effectiveElasticityValue"></td>
-                        <td class="tg-c3ow"></td>
+                        <td class="tg-c3ow">
+                            <p style="text-align:center;">
+                                <img src="pics/effectiveElasticity.png" alt="Effective elasticity" height="40">
+                            </p>
+                        </td>
                     </tr>
                     <tr>
                         <td class="tg-y698">Radius of the contact area a (𝜇m)</td>

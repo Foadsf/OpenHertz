@@ -1,9 +1,11 @@
 # OpenHertz
-OpenHertz is a cross-platform Free, Libre, and Open Source Software (FLOSS) for Hertzian contact calculations.
+OpenHertz is a Free, Libre, and Open Source Software (FLOSS) for Hertzian contact calculations.
 
 ## Installation:
 
-- Download this repository in ZIP format and unarchive it somewhere on your computer. (in a directory where there are no spaced in the path)
+- No installation is required. Just go to [the website](https://foadsf.github.io/OpenHertz/) and start using it. 
+
+- But if you want to use it locally, download this repository in ZIP format and unarchive it somewhere on your computer. (in a directory where there are no spaced in the path)
 
 <!-- ![Download the zip](pics/download.png) -->
 <pre>
@@ -12,12 +14,9 @@ OpenHertz is a cross-platform Free, Libre, and Open Source Software (FLOSS) for 
 </p>
 </pre>
 
-- Assign the `.ps1` files to PowerShell as described [here](https://www.top-password.com/blog/set-ps1-script-to-open-with-powershell-by-default/).
-
-
 ## Instructions:
 
-- Run the `OpenHertz.ps1`
+- run the `index.html` file
 - Choose the type of contact:
 
     * Sphere-Plane (R)
@@ -31,12 +30,21 @@ OpenHertz is a cross-platform Free, Libre, and Open Source Software (FLOSS) for 
     <!-- * Angled (α) -->
 
 - Next, depending on the option selected on the first step, one or two radii should be determined
-- If the two sides of the contact are different materials or the same will be determined next.
+<!-- - If the two sides of the contact are different materials or the same will be determined next. -->
 - Mechanical properties of the material(s) will be given to the software after that. Young elastic modulus (E), Poisson ratio (ν), and Yield strength (σ<sub>Y</sub>) will be given.
-- After all, the software will report the results automatically to the terminal
+- After all, the software will report the results automatically
 
 ## FAQ:
 
 - Why not supporting the imperial system of units? Please grow up, US!
-- Why not have a graphical user interface (GUI)? Who knows, maybe in the future it will be added
-- Why writing a software in PowerShell? It seems like the only scripting language included in all the Windows corporate machines that the potential audience of this software use.
+<!-- - Why not have a graphical user interface (GUI)? Who knows, maybe in the future it will be added -->
+<!-- - Why writing a software in PowerShell? It seems like the only scripting language included in all the Windows corporate machines that the potential audience of this software use. -->
+
+## Glossary:
+
+### Hardness:
+
+- Brinell - HB	
+- Rockwell C - HRC
+- Rockwell B - HRB
+- Vickers - HV
