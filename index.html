@@ -117,6 +117,12 @@
                                     pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="20.00"
                                     onchange="updateResults()">
                             </p>
+                            <p id="cylinderLength" style="display: none">
+                                <label>Cylinder's length (mm)</label>
+                                <input title="Please enter a positive number" id="cylinderLengthValue" type="number"
+                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="30.00"
+                                    onchange="updateResults()">
+                            </p>
 
                         </td>
                     </tr>
@@ -337,9 +343,14 @@
                             </p>
                         </td>
                     </tr>
-                    <tr>
+                    <tr id="pointContact">
                         <td class="tg-y698">Radius of the contact area a (𝜇m)</td>
                         <td class="tg-c3ow" id="contactRadius"></td>
+                        <td class="tg-c3ow"></td>
+                    </tr>
+                    <tr id="lineContact" style="display: none">
+                        <td class="tg-y698">Half contact width b (𝜇m)</td>
+                        <td class="tg-c3ow" id="contactWidth"></td>
                         <td class="tg-c3ow"></td>
                     </tr>
                     <tr>
