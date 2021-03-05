@@ -1,0 +1,15 @@
+                          Name, Elasticity, Poisson, Yield 
+       Aluminium 5052 H32 HV68,       70.3,    0.33,   193
+       Aluminium 5083 H32 HV98,       70.3,    0.33,   250
+       Aluminium 6061 T6  HV68,       68.9,    0.33,   214
+       Aluminium 6082 T6  HV99,         70,    0.33,   260
+      Aluminium 7075 T6  HV175,       71.7,    0.33,   503
+             Fused Silica SiO2,       73.1,    0.17,    55
+Stainless steel AISI 301 HV400,        180,    0.29,  1100
+Stainless steel AISI 304 HV213,        193,    0.29,   215
+Stainless steel AISI 314 HV180,        200,    0.29,   300
+     Tool steel AISI 420 HV541,        200,    0.24,  1360
+    Tool steel AISI 440C HV620,        200,    0.29,  1900
+                    Steel S235,        210,     0.3,   235
+                    Steel S275,        210,     0.3,   275
+                    Steel S355,        210,     0.3,   355
