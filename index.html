@@ -106,19 +106,19 @@
                     <tr>
                         <td class="tg-zv4m">
                             <p>
-                                <label>First radius (mm)</label>
+                                <label>First radius <b>R<sub>1</sub></b> (mm)</label>
                                 <input title="Please enter a positive number" id="firstRadius" type="number"
                                     pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="10.00"
                                     onchange="updateResults()">
                             </p>
                             <p id="secondRadius" style="display: none">
-                                <label>Second radius (mm)</label>
+                                <label>Second radius <b>R<sub>2</sub></b> (mm)</label>
                                 <input title="Please enter a positive number" id="secondRadiusValue" type="number"
                                     pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="20.00"
                                     onchange="updateResults()">
                             </p>
                             <p id="cylinderLength" style="display: none">
-                                <label>Cylinder's length (mm)</label>
+                                <label>Cylinder's length <b>L</b> (mm)</label>
                                 <input title="Please enter a positive number" id="cylinderLengthValue" type="number"
                                     pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="30.00"
                                     onchange="updateResults()">
@@ -136,7 +136,7 @@
         <fieldset>
             <legend>Load</legend>
             <p id="Force">
-                <label>Normal force (N)</label>
+                <label>Normal force <b>F</b> (N)</label>
                 <input title="Please enter a positive number" id="forceValue" type="number"
                     pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="20.00" onchange="updateResults()">
             </p>
@@ -218,7 +218,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="tg-y6fn">Young's modulus E (GPa)</td>
+                        <td class="tg-y6fn">Young's modulus <b>E</b> (GPa)</td>
                         <td class="tg-baqh"><input id="firstElastic" title="Please enter a positive number"
                                 type="number" value="200" pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"
                                 onchange="updateResults()"></td>
@@ -227,7 +227,7 @@
                                 onchange="updateResults()"></td>
                     </tr>
                     <tr>
-                        <td class="tg-y6fn">Poisson's ratio 𝜈</td>
+                        <td class="tg-y6fn">Poisson's ratio <b>𝜈</b></td>
                         <td class="tg-baqh"><input id="firstPoisson" title="Please enter a positive number below 0.5"
                                 type="number" value="0.3" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" max="0.5"
                                 onchange="updateResults()"></td>
@@ -236,7 +236,7 @@
                                 onchange="updateResults()"></td>
                     </tr>
                     <tr>
-                        <td class="tg-y6fn">Yield strength σ<sub>Y</sub> (MPa)</td>
+                        <td class="tg-y6fn">Yield strength <b>σ<sub>Y</sub></b> (MPa)</td>
                         <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="400"
                                 pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
                         <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="400"
@@ -326,48 +326,66 @@
                 </thead>
                 <tbody>
                     <tr id="effectiveRadius" style="display: none">
-                        <td class="tg-y698">Effective radius R<sub>*</sub> (mm)</td>
+                        <td class="tg-y698">Effective radius <b>R<sub>*</sub></b> (mm)</td>
                         <td class="tg-c3ow" id="effectiveRadiusValue"></td>
                         <td class="tg-c3ow">
                             <p style="text-align:center;">
-                                <img src="pics/effectiveRadius.PNG" alt="Effective radius" height="40">
+                                <img src="pics/effectiveRadius.svg" alt="Effective radius" height="40">
                             </p>
                         </td>
                     </tr>
                     <tr>
-                        <td class="tg-y698">Effective Elasticity E<sub>*</sub> (GPa)</td>
+                        <td class="tg-y698">Effective Elasticity <b>E<sub>*</sub></b> (GPa)</td>
                         <td class="tg-c3ow" id="effectiveElasticityValue"></td>
                         <td class="tg-c3ow">
                             <p style="text-align:center;">
-                                <img src="pics/effectiveElasticity.png" alt="Effective elasticity" height="40">
+                                <img src="pics/effectiveElasticity.svg" alt="Effective elasticity" height="40">
                             </p>
                         </td>
                     </tr>
                     <tr id="pointContact">
-                        <td class="tg-y698">Radius of the contact area a (𝜇m)</td>
+                        <td class="tg-y698">Radius of the contact area <b>a</b> (𝜇m)</td>
                         <td class="tg-c3ow" id="contactRadius"></td>
-                        <td class="tg-c3ow"></td>
+                        <td class="tg-c3ow">
+                            <p style="text-align:center;">
+                                <img src="pics/conactRadiusSphere.svg" alt="Contact radius" height="60">
+                            </p>
+                        </td>
                     </tr>
                     <tr id="lineContact" style="display: none">
-                        <td class="tg-y698">Half contact width b (𝜇m)</td>
+                        <td class="tg-y698">Half contact width <b>b</b> (𝜇m)</td>
                         <td class="tg-c3ow" id="contactWidth"></td>
-                        <td class="tg-c3ow"></td>
+                        <td class="tg-c3ow">
+                            <p style="text-align:center;">
+                                <img src="pics/conactWidth.svg" alt="Contact width" height="60">
+                            </p>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="tg-y698">Total deformation d (𝜇m)</td>
+                        <td class="tg-y698">Total deformation <b>d</b> (𝜇m)</td>
                         <td class="tg-c3ow" id="indentation"></td>
-                        <td class="tg-c3ow"></td>
+                        <td class="tg-c3ow">
+                            <p style="text-align:center;">
+                                <img id="indentationPicture" src="pics/indentationSphere.svg" alt="total displacement"
+                                    height="40">
+                            </p>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="tg-kftd">Maximum contact pressure P<sub>max</sub> (MPa)</td>
+                        <td class="tg-kftd">Maximum contact pressure <b>P<sub>max</sub></b> (MPa)</td>
                         <td class="tg-baqh" id="maximumPressure"></td>
-                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">
+                            <p style="text-align:center;">
+                                <img id="maxPressurePicture" src="pics/maxPressureSphere.svg" alt="Maximum pressure"
+                                    height="40">
+                            </p>
+                        </td>
                     </tr>
-                    <tr>
-                        <td class="tg-kftd">Safety factor SF</td>
+                    <!-- <tr>
+                        <td class="tg-kftd">Safety factor <b>SF</b></td>
                         <td class="tg-baqh"></td>
                         <td class="tg-baqh"></td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
             </p>

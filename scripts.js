@@ -9,19 +9,14 @@ var globalContactType;
 var globalOrientationType;
 var globalCylinderLength;
 
-
 function contactTypeFun(inputOption) {
-    // console.log(inputOption);
-    // document.getElementById('contactType').src = inputOption;
-    // var orientationList = document.getElementById("orientationList");
-    // var contactTypePic = document.getElementById('contactType').src;
+
+
     globalContactType = inputOption;
     if (inputOption == "4") {
         document.getElementById("orientationList").style.display = "block";
-        // document.getElementById('contactType').src = "pics/CylinderCylinderPerpendicular.PNG";
         orientationFun(document.getElementById("OrientationSelector").value);
         document.getElementById("secondRadius").style.display = "block";
-        // document.getElementById("cylinderLength").style.display = "block";
         document.getElementById("effectiveRadius").style.display = 'table-row';
     } else {
         document.getElementById("orientationList").style.display = "none";
@@ -33,7 +28,8 @@ function contactTypeFun(inputOption) {
                 document.getElementById("cylinderLength").style.display = "none";
                 document.getElementById("pointContact").style.display = "table-row";
                 document.getElementById("lineContact").style.display = "none";
-                // console.log("one");
+                document.getElementById('indentationPicture').src = "pics/indentationSphere.svg";
+                document.getElementById('maxPressurePicture').src = "pics/maxPressureSphere.svg";
                 break;
             case "2":
                 document.getElementById('contactType').src = "pics/SphereSphere.PNG";
@@ -42,7 +38,8 @@ function contactTypeFun(inputOption) {
                 document.getElementById("cylinderLength").style.display = "none";
                 document.getElementById("pointContact").style.display = "table-row";
                 document.getElementById("lineContact").style.display = "none";
-                // console.log("two");
+                document.getElementById('indentationPicture').src = "pics/indentationSphere.svg";
+                document.getElementById('maxPressurePicture').src = "pics/maxPressureSphere.svg";
                 break;
             case "3":
                 document.getElementById('contactType').src = "pics/CylinderPlane.PNG";
@@ -51,14 +48,13 @@ function contactTypeFun(inputOption) {
                 document.getElementById("cylinderLength").style.display = "block";
                 document.getElementById("pointContact").style.display = "none";
                 document.getElementById("lineContact").style.display = "table-row";
-                // console.log("three");
+                document.getElementById('indentationPicture').src = "pics/indentationLine.svg";
+                document.getElementById('maxPressurePicture').src = "pics/maxPressureLine.svg";
                 break;
         }
     }
-    // calculateEffectiveRadius()
     updateResults();
 }
-
 function orientationFun(inputOption) {
     switch (inputOption) {
         case "1":
@@ -72,117 +68,79 @@ function orientationFun(inputOption) {
             document.getElementById("cylinderLength").style.display = "block";
             document.getElementById("pointContact").style.display = "none";
             document.getElementById("lineContact").style.display = "table-row";
+            document.getElementById('indentationPicture').src = "pics/indentationLine.svg";
+            document.getElementById('maxPressurePicture').src = "pics/maxPressureLine.svg";
             break;
     }
     updateResults();
 }
-
 function calculateEffectiveRadius() {
     var fradius = parseFloat(document.getElementById("firstRadius").value);
 
-    // var localContactType = document.getElementById("contactTypeList").value;
-    // console.log(globalContactType);
 
-    // if (localContactType == "1" || localContactType == "3") {
     if (globalContactType == "1" || globalContactType == "3") {
         globalEffectiveRadius = fradius;
-        // console.log(localContactType);
     } else {
-        // console.log(localContactType);
         var sradius = parseFloat(document.getElementById("secondRadiusValue").value);
-        // console.log(sradius);
         globalEffectiveRadius = fradius * sradius / (fradius + sradius);
-        // console.log(globalEffectiveRadius);
+        // LaTeX --> \frac{1}{R_*} = \frac{1}{R_1} + \frac{1}{R_2}
     }
 
-    // globalEffectiveRadius = calculationResult;
-    // document.getElementById("effectiveRadiusValue").innerHTML = calculationResult.toFixed(2);
     return globalEffectiveRadius;
 }
-
 function calculateEffectiveElasticity() {
     var felastic = parseFloat(document.getElementById("firstElastic").value);
     var selastic = parseFloat(document.getElementById("secondElastic").value);
     var fPoisson = parseFloat(document.getElementById("firstPoisson").value);
     var sPoisson = parseFloat(document.getElementById("secondPoisson").value);
     globalEffectiveElasticity = felastic * selastic / (selastic * (1 - Math.pow(fPoisson, 2)) + felastic * (1 - Math.pow(sPoisson, 2)));
-    // document.getElementById("effectiveElasticityValue").innerHTML = calculationResult.toFixed(0);
-    // globalEffectiveElasticity = calculationResult;
+    // LaTeX --> \frac{1}{E_*} = \frac{1 - \nu_1^2}{E_1} + \frac{1 - \nu_2^2}{E_2}
     return globalEffectiveElasticity;
 }
-
 function calculateContactRadius() {
-    // var effectiveElasticity = calculateEffectiveElasticity() * 1E9;
-    // var effectiveElasticity = globalEffectiveElasticity * 1E9;
-    // var effectiveRadius = calculateEffectiveRadius() / 1E3;
-    // var effectiveRadius = globalEffectiveRadius / 1E3;
-    // globalForce = parseFloat(document.getElementById("forceValue").value);
     globalContactRadius = Math.pow(3 * globalForce * globalEffectiveRadius / 1E3 / 4 / globalEffectiveElasticity / 1E9, (1 / 3)) * 1E6;
-    // document.getElementById("contactRadius").innerHTML = calculationResult.toFixed(2);
-    // globalContactRadius = calculationResult;
+    // LaTeX --> \sqrt[3]{\frac{3 F R_*}{4 E_*}}
     return globalContactRadius;
 }
 
 function calculateContactWidth() {
-    // globalForce = parseFloat(document.getElementById("forceValue").value);
     globalCylinderLength = parseFloat(document.getElementById("cylinderLengthValue").value);
     globalContactWidth = 2 * Math.sqrt(globalForce * globalEffectiveRadius / 1E3 / Math.PI / globalCylinderLength * 1E3 / globalEffectiveElasticity / 1E9) * 1E6;
+    // LaTeX --> 2 \sqrt{\frac{F R_*}{\pi L E_*}}
     return globalContactWidth;
 }
 
-
 function calculateIndentation() {
-    // var effectiveRadius = calculateEffectiveRadius() * 1E3;
-    // var effectiveRadius = globalEffectiveRadius * 1E3;
-    // var contactRadius = calculateContactRadius();
-
-    // console.log(globalContactType);
-    // console.log(globalOrientationType);
-
-
     if (globalContactType == "3" || (globalContactType == "4" && globalOrientationType == "2")) {
         globalIndentation = globalForce / Math.PI / globalEffectiveElasticity / 1E9 / globalCylinderLength * 1E3 * (Math.log(4 * Math.PI * globalEffectiveElasticity * 1E9 * globalEffectiveRadius / 1E3 * globalCylinderLength / 1E3 / globalForce) - 1) * 1E6;
-        // globalIndentation = Math.pow(globalContactWidth, 2) / globalEffectiveRadius / 1E3;
-        // console.log(globalContactWidth);
-        // console.log(globalEffectiveRadius);
+        // LaTeX --> \frac{F}{\pi E_* L} \left( \ln{\left( \frac{4 \pi E_* R_* L}{F} \right)} - 1 \right)
     } else {
         globalIndentation = Math.pow(globalContactRadius, 2) / globalEffectiveRadius / 1E3;
+        // LaTeX --> \frac{a^2}{R_*}
     }
-
-
-    // document.getElementById("indentation").innerHTML = calculationResult.toFixed(2);
     return globalIndentation;
 }
 
-// 3 * $force / 2 / [Math]::PI / [Math]::Pow($contact_radius, 2)
-
 function calculateMaximumPressure() {
-    // var contactRadius = calculateContactRadius() / 1E6;
-    // var force = parseFloat(document.getElementById("forceValue").value);
+
     if (globalContactType == "3" || (globalContactType == "4" && globalOrientationType == "2")) {
         globalMaximumPressure = 2 * globalForce / Math.PI / globalCylinderLength * 1E3 / globalContactWidth * 1E6 / 1E6;
+        // LaTeX --> \frac{2 F}{\pi b L}
     } else {
         globalMaximumPressure = 3 * globalForce / 2 / Math.PI / Math.pow(globalContactRadius / 1E6, 2) / 1E6;
+        // LaTeX --> \frac{3 F}{2\pi R_*^2}
     }
 
-    // document.getElementById("maximumPressure").innerHTML = calculationResult.toFixed(0);
-    // globalMaximumPressure = calculationResult;
     return globalMaximumPressure;
 }
-
 function updateResults() {
     globalForce = parseFloat(document.getElementById("forceValue").value);
     globalContactType = document.getElementById("contactTypeList").value;
     globalOrientationType = document.getElementById("OrientationSelector").value;
     document.getElementById("effectiveRadiusValue").innerHTML = calculateEffectiveRadius().toFixed(2);
-    // calculateEffectiveRadius();
     document.getElementById("effectiveElasticityValue").innerHTML = calculateEffectiveElasticity().toFixed(2);
-    // calculateEffectiveElasticity();
     document.getElementById("contactRadius").innerHTML = calculateContactRadius().toFixed(3);
-    // calculateContactRadius();
     document.getElementById("contactWidth").innerHTML = calculateContactWidth().toFixed(3);
     document.getElementById("indentation").innerHTML = calculateIndentation().toFixed(3);
-    // calculateIndentation()
     document.getElementById("maximumPressure").innerHTML = calculateMaximumPressure().toFixed(2);
-    // calculateMaximumPressure()
 }
