@@ -9,6 +9,7 @@ var globalContactType;
 var globalOrientationType;
 var globalCylinderLength;
 var globalMisesCo;
+var globalMisesDepth;
 
 
 var fPoisson;
@@ -59,6 +60,8 @@ function contactTypeFun(inputOption) {
                 document.getElementById('indentationPicture').src = "pics/indentationLine.svg";
                 document.getElementById('maxPressurePicture').src = "pics/maxPressureLine.svg";
                 break;
+            case "5":
+                document.getElementById('contactType').src = "pics/Elliptical.PNG";
         }
     }
     updateResults();
@@ -105,7 +108,7 @@ function calculateEffectiveElasticity() {
     return globalEffectiveElasticity;
 }
 function calculateContactRadius() {
-    if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "2" && fradius == sradius)) {
+    if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "1" && fradius == sradius)) {
         globalContactRadius = Math.pow(3 * globalForce * globalEffectiveRadius / 1E3 / 4 / globalEffectiveElasticity / 1E9, (1 / 3)) * 1E6;
         // LaTeX --> \sqrt[3]{\frac{3 F R_*}{4 E_*}}
     } else {
@@ -127,7 +130,7 @@ function calculateIndentation() {
         globalIndentation = globalForce / Math.PI / globalEffectiveElasticity / 1E9 / globalCylinderLength * 1E3 * (Math.log(4 * Math.PI * globalEffectiveElasticity * 1E9 * globalEffectiveRadius / 1E3 * globalCylinderLength / 1E3 / globalForce) - 1) * 1E6;
         // LaTeX --> \frac{F}{\pi E_* L} \left( \ln{\left( \frac{4 \pi E_* R_* L}{F} \right)} - 1 \right)
     } else {
-        if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "2" && fradius == sradius)) {
+        if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "1" && fradius == sradius)) {
             globalIndentation = Math.pow(globalContactRadius, 2) / globalEffectiveRadius / 1E3;
             // LaTeX --> \frac{a^2}{R_*}
         } else {
@@ -144,7 +147,7 @@ function calculateMaximumPressure() {
         globalMaximumPressure = 2 * globalForce / Math.PI / globalCylinderLength * 1E3 / globalContactWidth * 1E6 / 1E6;
         // LaTeX --> \frac{2 F}{\pi b L}
     } else {
-        if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "2" && fradius == sradius)) {
+        if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "1" && fradius == sradius)) {
             globalMaximumPressure = 3 * globalForce / 2 / Math.PI / Math.pow(globalContactRadius / 1E6, 2) / 1E6;
             // LaTeX --> \frac{3 F}{2\pi R_*^2}
         } else {
@@ -169,16 +172,44 @@ function calculateMisesCo(inputPoisson) {
         }
 
     } else {
-        if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "2" && fradius == sradius)) {
+        if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "1" && fradius == sradius)) {
             // document.getElementById('maxMisesPicture').src = "pics/maxMisesSphere.svg";
             globalMisesCo = 1.30075 + 0.87825 * inputPoisson + 0.54373 * Math.pow(inputPoisson, 2);
             // LaTeX --> \frac{P_{max}}{1.30075 + 0.87825  \nu_i + 0.54373 \nu_i^2}
+
+            // globalMisesCo = 3 / (1 - 2 * inputPoisson);
         } else {
             globalMisesCo = NaN;
         }
 
     }
     return globalMisesCo;
+}
+
+function calculateMisesDepth(inputPoisson) {
+    if (globalContactType == "3" || (globalContactType == "4" && globalOrientationType == "2")) {
+
+
+    } else {
+        if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "1" && fradius == sradius)) {
+            globalMisesDepth = 0.48 * globalContactRadius;
+        } else {
+            globalMisesDepth = NaN;
+        }
+
+    }
+}
+
+function calculateShear(params) {
+
+}
+
+function calculateShearDepth(params) {
+
+}
+
+function calculateStiffness(params) {
+
 }
 
 
