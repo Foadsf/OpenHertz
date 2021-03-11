@@ -192,15 +192,20 @@ function calculateMisesDepth(inputPoisson) {
 
     } else {
         if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "1" && fradius == sradius)) {
-            globalMisesDepth = 0.48 * globalContactRadius;
+            // globalMisesDepth = 0.48 * globalContactRadius;
+            var zeta = 0.38167 + 0.33136 * inputPoisson;
         } else {
             globalMisesDepth = NaN;
         }
 
     }
+
+    return zeta;
 }
 
 function calculateShear(params) {
+
+    // LaTeX --> \frac{\tau_{max}}{P_{max}} = \frac{1}{2} \left( \zeta \left( 1 + \nu \right) \text{ArcCot} \left( \zeta \right) - 1 - \nu + \frac{3}{2 \left( 1 + \zeta^2 \right)} \right)
 
 }
 
@@ -226,5 +231,6 @@ function updateResults() {
 
     document.getElementById("firstMises").innerHTML = (globalMaximumPressure / calculateMisesCo(fPoisson)).toFixed(2);
     document.getElementById("secondMises").innerHTML = (globalMaximumPressure / calculateMisesCo(sPoisson)).toFixed(2);
-
+    document.getElementById("firstMisesDepth").innerHTML = (globalContactRadius * calculateMisesDepth(fPoisson)).toFixed(3);
+    document.getElementById("secondMisesDepth").innerHTML = (globalContactRadius * calculateMisesDepth(sPoisson)).toFixed(3);
 }
