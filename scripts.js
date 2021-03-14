@@ -191,7 +191,15 @@ function calculateMisesDepth(inputPoisson) {
     var zeta;
     if (globalContactType == "3" || (globalContactType == "4" && globalOrientationType == "2")) {
 
-        zeta = NaN;
+        if (inputPoisson < 0.1938) {
+
+            zeta = 0;
+            // LaTeX --> 
+        } else {
+
+            zeta = 0.223 + 2.321 * inputPoisson - 2.397 * Math.pow(inputPoisson, 2);
+            // LaTeX --> 
+        }
 
     } else {
         if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "1" && fradius == sradius)) {
@@ -263,11 +271,30 @@ function updateResults() {
 
     document.getElementById("firstMises").innerHTML = (globalMaximumPressure / calculateMisesCo(fPoisson)).toFixed(2);
     document.getElementById("secondMises").innerHTML = (globalMaximumPressure / calculateMisesCo(sPoisson)).toFixed(2);
-    document.getElementById("firstMisesDepth").innerHTML = (globalContactRadius * calculateMisesDepth(fPoisson)).toFixed(3);
-    document.getElementById("secondMisesDepth").innerHTML = (globalContactRadius * calculateMisesDepth(sPoisson)).toFixed(3);
+
 
     document.getElementById("firstShear").innerHTML = (globalMaximumPressure / calculateShearCo(fPoisson)).toFixed(2);
     document.getElementById("secondShear").innerHTML = (globalMaximumPressure / calculateShearCo(sPoisson)).toFixed(2);
-    document.getElementById("firstShearDepth").innerHTML = (globalContactRadius * calculateShearDepth(fPoisson)).toFixed(3);
-    document.getElementById("secondShearDepth").innerHTML = (globalContactRadius * calculateShearDepth(sPoisson)).toFixed(3);
+
+
+    if (globalContactType == "3" || (globalContactType == "4" && globalOrientationType == "2")) {
+
+        document.getElementById("firstMisesDepth").innerHTML = (globalContactWidth * calculateMisesDepth(fPoisson)).toFixed(3);
+        document.getElementById("secondMisesDepth").innerHTML = (globalContactWidth * calculateMisesDepth(sPoisson)).toFixed(3);
+        document.getElementById("firstShearDepth").innerHTML = (globalContactWidth * calculateShearDepth(fPoisson)).toFixed(3);
+        document.getElementById("secondShearDepth").innerHTML = (globalContactWidth * calculateShearDepth(sPoisson)).toFixed(3);
+
+    } else {
+        if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "1" && fradius == sradius)) {
+
+            document.getElementById("firstMisesDepth").innerHTML = (globalContactRadius * calculateMisesDepth(fPoisson)).toFixed(3);
+            document.getElementById("secondMisesDepth").innerHTML = (globalContactRadius * calculateMisesDepth(sPoisson)).toFixed(3);
+            document.getElementById("firstShearDepth").innerHTML = (globalContactRadius * calculateShearDepth(fPoisson)).toFixed(3);
+            document.getElementById("secondShearDepth").innerHTML = (globalContactRadius * calculateShearDepth(sPoisson)).toFixed(3);
+        } else {
+
+
+        }
+
+    }
 }
