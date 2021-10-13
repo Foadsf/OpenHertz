@@ -5,7 +5,7 @@ OpenHertz is a Free, Libre, and Open Source Software (FLOSS) for Hertzian contac
 
 - No installation is required. Just go to [the website](https://foadsf.github.io/OpenHertz/) and start using it. 
 
-- But if you want to use it locally, download this repository in ZIP format and unarchive it somewhere on your computer. (in a directory where there are no spaced in the path)
+- But if you want to use it locally, download this repository in ZIP format and unarchive it somewhere on your computer.
 
 <!-- ![Download the zip](pics/download.png) -->
 <pre>

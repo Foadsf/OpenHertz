@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-    <title>OpenHertz</title>
+    <title>OpenHertz (𝛽)</title>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/jpg" href="pics/favicon.jpg" />
     <link rel="stylesheet" href="styles.css">
@@ -14,7 +14,7 @@
 
     <h1>OpenHertz</h1>
     <p>
-        Welcome to OpenHertz v 0.0.5 a Free Hertzian contact calculator.
+        Welcome to OpenHertz v 0.0.6 a Free Hertzian contact calculator.
         If there are any issues please report them on <a href="https://github.com/Foadsf/OpenHertz" target="_blank"
             rel="noopener noreferrer">the GitHub
             repository</a>.
@@ -82,6 +82,7 @@
                                     <option value="2">Sphere - Sphere</option>
                                     <option value="3">Cylinder - Plane</option>
                                     <option value="4">Cylinder - Cylinder</option>
+                                    <option value="5">Elliptical</option>
                                 </select>
                             </p>
                             <p id="orientationList" style="display: none">
@@ -92,7 +93,7 @@
                                 <option value="pics/CylinderCylinderParallel.PNG">Parallel</option> -->
                                     <option value="1">Perpendicular</option>
                                     <option value="2">Parallel</option>
-                                    <!-- <option value="pics/CylinderPlane.PNG">Angled</option> -->
+                                    <!-- <option>Angled</option> -->
                                 </select>
                             </p>
                         </th>
@@ -113,8 +114,8 @@
                             </p>
                             <p id="secondRadius" style="display: none">
                                 <label>Second radius <b>R<sub>2</sub></b> (mm)</label>
-                                <input title="Please enter a positive number" id="secondRadiusValue" type="number"
-                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="20.00"
+                                <input title="Please enter a number" id="secondRadiusValue" type="number"
+                                    pattern="-?[0-9]+([\.,][0-9]+)?" step="0.01" value="20.00"
                                     onchange="updateResults()">
                             </p>
                             <p id="cylinderLength" style="display: none">
@@ -372,7 +373,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="tg-kftd">Maximum contact pressure <b>P<sub>max</sub></b> (MPa)</td>
+                        <td class="tg-kftd">Max contact pressure <b>P<sub>max</sub></b> (MPa)</td>
                         <td class="tg-baqh" id="maximumPressure"></td>
                         <td class="tg-baqh">
                             <p style="text-align:center;">
@@ -389,6 +390,112 @@
                 </tbody>
             </table>
             </p>
+            <p>
+                <style type="text/css">
+                    .tg {
+                        border-collapse: collapse;
+                        border-spacing: 0;
+                    }
+
+                    .tg td {
+                        border-color: black;
+                        border-style: solid;
+                        border-width: 1px;
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                        overflow: hidden;
+                        padding: 10px 5px;
+                        word-break: normal;
+                    }
+
+                    .tg th {
+                        border-color: black;
+                        border-style: solid;
+                        border-width: 1px;
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                        font-weight: normal;
+                        overflow: hidden;
+                        padding: 10px 5px;
+                        word-break: normal;
+                    }
+
+                    .tg .tg-uqo3 {
+                        background-color: #efefef;
+                        text-align: center;
+                        vertical-align: top
+                    }
+
+                    .tg .tg-baqh {
+                        text-align: center;
+                        vertical-align: top
+                    }
+
+                    .tg .tg-kftd {
+                        background-color: #efefef;
+                        text-align: left;
+                        vertical-align: top
+                    }
+
+                    .tg .tg-0lax {
+                        text-align: left;
+                        vertical-align: top;
+                        min-width: 240px;
+                        width: 260px
+                    }
+                </style>
+            <table class="tg" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="tg-0lax"></th>
+                        <th class="tg-uqo3">First body</th>
+                        <th class="tg-uqo3">Second body</th>
+                        <!-- <th class="tg-uqo3">Equation</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tg-kftd">Max von Mises stress <b>σ<sub>max</sub></b> (MPa)</td>
+                        <td class="tg-baqh" id="firstMises"></td>
+                        <td class="tg-baqh" id="secondMises"></td>
+                        <!-- <td class="tg-baqh">
+                            <p style="text-align:center;">
+                                <img id="maxMisesPicture" src="pics/maxMisesSphere.svg" alt="Maximum von Mises stress" height="40"> 
+                                <img id="maxMisesPicture" alt="Maximum von Mises stress" height="40"> 
+                            </p>
+                        </td> -->
+                    </tr>
+                    <tr>
+                        <td class="tg-kftd">Depth max von Mises <b>Z<sub>σ<sub>max</sub></sub></b> (𝜇m)</td>
+                        <td class="tg-baqh" id="firstMisesDepth"></td>
+                        <td class="tg-baqh" id="secondMisesDepth"></td>
+                        <!-- <td class="tg-baqh"></td> -->
+                    </tr>
+                    <tr>
+                        <td class="tg-kftd">Max shear stress <b>𝜏<sub>max</sub></b> (MPa)</td>
+                        <td class="tg-baqh" id="firstShear"></td>
+                        <td class="tg-baqh" id="secondShear"></td>
+                        <!-- <td class="tg-baqh"></td> -->
+                    </tr>
+                    <tr>
+                        <td class="tg-kftd">Depth max shear <b>Z<sub>𝜏<sub>max</sub></sub></b> (𝜇m)</td>
+                        <td class="tg-baqh" id="firstShearDepth"></td>
+                        <td class="tg-baqh" id="secondShearDepth"></td>
+                        <!-- <td class="tg-baqh"></td> -->
+                    </tr>
+                </tbody>
+            </table>
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>References</legend>
+
+            <ol>
+                <li>Green, Itzhak. "Poisson ratio effects and critical valus in spherical and cylindrical Hertzian
+                    contacts." Applied Mechanics and Engineering 10.3 (2005): 451-462.</li>
+            </ol>
+
         </fieldset>
     </form>
     <script type="text/javascript" src="scripts.js"></script>
