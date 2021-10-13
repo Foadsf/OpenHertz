@@ -219,11 +219,16 @@ function calculateShearCo(inputPoisson) {
     // LaTeX --> \frac{\tau_{max}}{P_{max}} = \frac{1}{2} \left( \zeta \left( 1 + \nu \right) \text{ArcCot} \left( \zeta \right) - 1 - \nu + \frac{3}{2 \left( 1 + \zeta^2 \right)} \right)
 
     if (globalContactType == "3" || (globalContactType == "4" && globalOrientationType == "2")) {
-        globalShearCo = NaN;
+        // globalShearCo = NaN;
+        if (inputPoisson < 0.2415) {
+            globalShearCo = 0.4767 * Math.pow(inputPoisson, 2) - 0.9302 * inputPoisson + 0.4976;
+        } else {
+            globalShearCo = 0.3003;
+        }
 
     } else {
         if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "1" && fradius == sradius)) {
-            globalShearCo = 2.6013 + 1.7585 * inputPoisson + 1.0842 * Math.pow(inputPoisson, 2);
+            globalShearCo = 1 / (2.6013 + 1.7585 * inputPoisson + 1.0842 * Math.pow(inputPoisson, 2));
         } else {
             globalShearCo = NaN;
         }
@@ -237,7 +242,12 @@ function calculateShearDepth(inputPoisson) {
     var zeta;
     if (globalContactType == "3" || (globalContactType == "4" && globalOrientationType == "2")) {
 
-        zeta = NaN;
+        // zeta = NaN;
+        if (inputPoisson < 0.2415) {
+            zeta = 2.2694 * Math.pow(inputPoisson, 3) - 1.6849 * Math.pow(inputPoisson, 2) + 1.8433 * inputPoisson + 2.8898e-03;
+        } else {
+            zeta = 0.7861;
+        }
 
     } else {
         if (globalContactType == "1" || globalContactType == "2" || (globalContactType == "4" && globalOrientationType == "1" && fradius == sradius)) {
@@ -273,8 +283,8 @@ function updateResults() {
     document.getElementById("secondMises").innerHTML = (globalMaximumPressure / calculateMisesCo(sPoisson)).toFixed(2);
 
 
-    document.getElementById("firstShear").innerHTML = (globalMaximumPressure / calculateShearCo(fPoisson)).toFixed(2);
-    document.getElementById("secondShear").innerHTML = (globalMaximumPressure / calculateShearCo(sPoisson)).toFixed(2);
+    document.getElementById("firstShear").innerHTML = (globalMaximumPressure * calculateShearCo(fPoisson)).toFixed(2);
+    document.getElementById("secondShear").innerHTML = (globalMaximumPressure * calculateShearCo(sPoisson)).toFixed(2);
 
 
     if (globalContactType == "3" || (globalContactType == "4" && globalOrientationType == "2")) {

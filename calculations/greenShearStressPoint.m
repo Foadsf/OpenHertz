@@ -14,10 +14,10 @@ end
 
 %plot(nu_array, zeta_m)
 
-%zeta_m_pol = polyfit(nu_array, zeta_m, 2);
+zeta_m_pol = polyfit(nu_array, zeta_m, 1)
 
 tmm = 2 ./ (-1 + 3 / 2 ./ (1 + zeta_m.^2) - nu_array + zeta_m .* (1 + nu_array) .* acot(zeta_m));
 
 %plot(nu_array, tmm);
 
-%tmm_pol = polyfit(nu_array, tmm, 3)
+tmm_pol = polyfit(nu_array, tmm, 2)

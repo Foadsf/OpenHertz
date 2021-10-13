@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-    <title>OpenHertz</title>
+    <title>OpenHertz (𝛽)</title>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/jpg" href="pics/favicon.jpg" />
     <link rel="stylesheet" href="styles.css">
@@ -14,7 +14,7 @@
 
     <h1>OpenHertz</h1>
     <p>
-        Welcome to OpenHertz v 0.0.5 a Free Hertzian contact calculator.
+        Welcome to OpenHertz v 0.0.6 a Free Hertzian contact calculator.
         If there are any issues please report them on <a href="https://github.com/Foadsf/OpenHertz" target="_blank"
             rel="noopener noreferrer">the GitHub
             repository</a>.
@@ -450,7 +450,7 @@
                         <th class="tg-0lax"></th>
                         <th class="tg-uqo3">First body</th>
                         <th class="tg-uqo3">Second body</th>
-                        <th class="tg-uqo3">Equation</th>
+                        <!-- <th class="tg-uqo3">Equation</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -458,34 +458,44 @@
                         <td class="tg-kftd">Max von Mises stress <b>σ<sub>max</sub></b> (MPa)</td>
                         <td class="tg-baqh" id="firstMises"></td>
                         <td class="tg-baqh" id="secondMises"></td>
-                        <td class="tg-baqh">
+                        <!-- <td class="tg-baqh">
                             <p style="text-align:center;">
                                 <!-- <img id="maxMisesPicture" src="pics/maxMisesSphere.svg" alt="Maximum von Mises stress" height="40"> -->
-                                <img id="maxMisesPicture" alt="Maximum von Mises stress" height="40">
-                            </p>
-                        </td>
+                        <!-- <img id="maxMisesPicture" alt="Maximum von Mises stress" height="40"> -->
+                        </p>
+                        </td> -->
                     </tr>
                     <tr>
                         <td class="tg-kftd">Depth max von Mises <b>Z<sub>σ<sub>max</sub></sub></b> (𝜇m)</td>
                         <td class="tg-baqh" id="firstMisesDepth"></td>
                         <td class="tg-baqh" id="secondMisesDepth"></td>
-                        <td class="tg-baqh"></td>
+                        <!-- <td class="tg-baqh"></td> -->
                     </tr>
                     <tr>
                         <td class="tg-kftd">Max shear stress <b>𝜏<sub>max</sub></b> (MPa)</td>
                         <td class="tg-baqh" id="firstShear"></td>
                         <td class="tg-baqh" id="secondShear"></td>
-                        <td class="tg-baqh"></td>
+                        <!-- <td class="tg-baqh"></td> -->
                     </tr>
                     <tr>
                         <td class="tg-kftd">Depth max shear <b>Z<sub>𝜏<sub>max</sub></sub></b> (𝜇m)</td>
                         <td class="tg-baqh" id="firstShearDepth"></td>
                         <td class="tg-baqh" id="secondShearDepth"></td>
-                        <td class="tg-baqh"></td>
+                        <!-- <td class="tg-baqh"></td> -->
                     </tr>
                 </tbody>
             </table>
             </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>References</legend>
+
+            <ol>
+                <li>Green, Itzhak. "Poisson ratio effects and critical valus in spherical and cylindrical Hertzian
+                    contacts." Applied Mechanics and Engineering 10.3 (2005): 451-462.</li>
+            </ol>
+
         </fieldset>
     </form>
     <script type="text/javascript" src="scripts.js"></script>
