@@ -1,6 +1,6 @@
 # OpenHertz
 
-OpenHertz is a Free, Libre, and Open Source Software (FLOSS) for Hertzian contact calculations. The software can be used to calculate contact area, deformation, maximum contact pressure, maximum von Mises and shear stresses, and their location between spears, cylinders, and flat surfaces. The software is named after [Heinrich Rudolf Hertz (1857-1894)](https://en.wikipedia.org/wiki/Heinrich_Hertz), to honor his pioneer work in the field of contact mechanics and tribology. I have written more about the software [here on Reddit](https://www.reddit.com/r/MechanicalEngineering/comments/m0r66y/introducing_openhertz_opensource_hertzian_contact/?utm_source=share&utm_medium=web2x&context=3).
+OpenHertz is a Free, Libre, and Open Source Software (FLOSS) for Hertzian contact calculations. The software can be used to calculate contact area, deformation, maximum contact pressure, maximum von Mises and shear stresses, and their location between spheres, cylinders, and flat surfaces. The software is named after [Heinrich Rudolf Hertz (1857-1894)](https://en.wikipedia.org/wiki/Heinrich_Hertz), to honor his pioneer work in the field of contact mechanics and tribology. I have written more about the software [here on Reddit](https://www.reddit.com/r/MechanicalEngineering/comments/m0r66y/introducing_openhertz_opensource_hertzian_contact/?utm_source=share&utm_medium=web2x&context=3).
 
 ## Instructions
 
