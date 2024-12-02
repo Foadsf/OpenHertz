@@ -70,6 +70,7 @@ If you can't contribute by code but you want to support the project, here are th
 - Introduce this tool to your friends, colleagues, students, grandmas 😎, ...
 - Put the link to this repo on your website, blog, social media ... spread the word
 - Follow me on Twitter ![Twitter Follow](https://img.shields.io/twitter/follow/fsfarimani?label=Follow&style=social), or endorse me on LinkedIn [![LinkedIn](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/fsfarimani/)
+- I developed this toll following my research [here](https://www.emerald.com/insight/content/doi/10.1108/rpj-06-2019-0171/full/html). If you find it useful, feel free to cite me. 😉
 
 - If you do really use tool for profit you can [sponsor me up there](https://github.com/sponsors/Foadsf) 👆 as well, most probably I will pay most of it back to the FLOSS community again.
 
