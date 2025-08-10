@@ -51,8 +51,7 @@ The [OpenHertz webapp](https://foadsf.github.io/OpenHertz/) has been designed to
 If you are interested, these are the areas I need the most help:
 
 - I need to add Imperial system of units
-- I know nothing about frontend development (i.e., HTML, JavaScript, CSS), or programing for that matter. My code is a text book example of spaghetti code. Please help me reformat it and make it more maintainable.
-  - the CSS and JavaScript parts should be modularized
+- The frontend could be improved:
   - the web app must be mobile friendly
   - proper hints should be displayed when hovering mouse over different areas
 - I need to add other contact types:
