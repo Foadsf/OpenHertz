@@ -7,6 +7,7 @@ export function calculate(s) {
             firstMisesDepth: 0, secondMisesDepth: 0,
             firstShear: 0, secondShear: 0,
             firstShearDepth: 0, secondShearDepth: 0,
+            pullOffForce: 0, taborParameter: 0, adhesionModel: 'N/A',
         };
     }
     const isPointContact = s.contactType === '1' || s.contactType === '2' || (s.contactType === '4' && s.orientation === '1' && s.firstRadius === s.secondRadius);
@@ -110,6 +111,30 @@ export function calculate(s) {
         secondShearDepth = dim * calcShearDepthFactor(s.secondPoisson);
     }
 
+    // --- Adhesion Logic ---
+    const z0 = 1.65e-10; // Equilibrium separation distance in meters
+    const R_m = effectiveRadius / 1000; // Effective radius in meters
+    const E_star_Pa = effectiveElasticity * 1e9; // Effective elasticity in Pascals
+
+    const taborParameter = Math.pow((R_m * s.workOfAdhesion**2) / (E_star_Pa**2 * z0**3), 1/3);
+
+    let pullOffForce = NaN;
+    let adhesionModel = 'N/A';
+
+    if (isPointContact) {
+        // Using Carpick-Ogletree-Salmeron approximation
+        pullOffForce = -2 * Math.PI * R_m * s.workOfAdhesion * (1 + 3.04 * taborParameter**0.55) / (1 + 1.16 * taborParameter);
+
+        if (taborParameter < 0.1) {
+            adhesionModel = 'DMT';
+        } else if (taborParameter > 5) {
+            adhesionModel = 'JKR';
+        } else {
+            adhesionModel = 'Intermediate (Maugis-Dugdale)';
+        }
+    }
+
+
     return {
       effectiveRadius, effectiveElasticity,
       contactRadius, contactWidth, indentation, maximumPressure,
@@ -117,5 +142,6 @@ export function calculate(s) {
       firstMisesDepth, secondMisesDepth,
       firstShear, secondShear,
       firstShearDepth, secondShearDepth,
+      pullOffForce, taborParameter, adhesionModel,
     };
 }

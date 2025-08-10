@@ -1,7 +1,8 @@
 import { calculate } from '../calculator.js';
 
 describe('Hertzian Contact Calculator', () => {
-  it('should calculate the results for a sphere on a plane', () => {
+  describe('Core Calculations', () => {
+    it('should calculate the results for a sphere on a plane', () => {
     const state = {
       contactType: '1',
       orientation: '1',
@@ -88,5 +89,68 @@ describe('Hertzian Contact Calculator', () => {
     expect(results1.effectiveElasticity).toBeCloseTo(results2.effectiveElasticity);
     expect(results1.contactRadius).toBeCloseTo(results2.contactRadius);
     expect(results1.maximumPressure).toBeCloseTo(results2.maximumPressure);
+  });
+  });
+
+  describe('Adhesion Calculations', () => {
+    const adhesionState = {
+      contactType: '1',
+      orientation: '1',
+      firstRadius: 10.0,
+      secondRadius: 20.0,
+      cylinderLength: 30.0,
+      force: 1000,
+      firstElastic: 200,
+      secondElastic: 200,
+      firstPoisson: 0.3,
+      secondPoisson: 0.3,
+      workOfAdhesion: 0.5,
+    };
+
+    it('should calculate the Tabor parameter correctly', () => {
+      const results = calculate(adhesionState);
+      expect(results.taborParameter).toBeCloseTo(35.85, 2);
+    });
+
+    it('should calculate the pull-off force correctly', () => {
+      const results = calculate(adhesionState);
+      expect(results.pullOffForce).toBeCloseTo(-0.0168, 4);
+    });
+
+    it('should recommend the correct adhesion model based on Tabor parameter', () => {
+      // DMT regime (e.g., stiff material, sharp tip)
+      const dmtState = {
+        ...adhesionState,
+        firstRadius: 1e-5, // 10 nm
+        firstElastic: 1000, // DLC
+        secondElastic: 1000,
+        firstPoisson: 0.2,
+        secondPoisson: 0.2,
+        workOfAdhesion: 0.1,
+      };
+      let results = calculate(dmtState);
+      expect(results.taborParameter).toBeLessThan(0.1);
+      expect(results.adhesionModel).toBe('DMT');
+
+      // JKR regime (e.g., soft material like PDMS)
+      const jkrState = {
+        ...adhesionState,
+        firstElastic: 0.002, // 2 MPa
+        secondElastic: 0.002,
+        firstPoisson: 0.5,
+        secondPoisson: 0.5,
+        workOfAdhesion: 0.05, // 50 mJ/m^2
+      };
+      results = calculate(jkrState);
+      expect(results.taborParameter).toBeGreaterThan(5);
+      expect(results.adhesionModel).toBe('JKR');
+
+      // Intermediate regime (steel on steel with low w)
+      const intermediateState = { ...adhesionState, workOfAdhesion: 0.0065 };
+      results = calculate(intermediateState);
+      expect(results.taborParameter).toBeGreaterThan(0.1);
+      expect(results.taborParameter).toBeLessThan(5);
+      expect(results.adhesionModel).toBe('Intermediate (Maugis-Dugdale)');
+    });
   });
 });

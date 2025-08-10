@@ -12,6 +12,7 @@ const app = {
     secondElastic: 200,
     firstPoisson: 0.3,
     secondPoisson: 0.3,
+    workOfAdhesion: 0.1,
   },
   elements: {},
   init() {
@@ -51,6 +52,10 @@ const app = {
     this.elements.secondShear = document.getElementById('secondShear');
     this.elements.firstShearDepth = document.getElementById('firstShearDepth');
     this.elements.secondShearDepth = document.getElementById('secondShearDepth');
+    this.elements.workOfAdhesion = document.getElementById('workOfAdhesion');
+    this.elements.pullOffForceValue = document.getElementById('pullOffForceValue');
+    this.elements.taborParameterValue = document.getElementById('taborParameterValue');
+    this.elements.adhesionModelValue = document.getElementById('adhesionModelValue');
 
     // Add event listeners
     const inputs = [
@@ -58,7 +63,8 @@ const app = {
       this.elements.firstRadius, this.elements.secondRadiusValue,
       this.elements.cylinderLengthValue, this.elements.forceValue,
       this.elements.firstElastic, this.elements.secondElastic,
-      this.elements.firstPoisson, this.elements.secondPoisson
+      this.elements.firstPoisson, this.elements.secondPoisson,
+      this.elements.workOfAdhesion
     ];
     inputs.forEach(input => {
         if(input) {
@@ -80,6 +86,7 @@ const app = {
     this.state.secondElastic = parseFloat(this.elements.secondElastic.value);
     this.state.firstPoisson = parseFloat(this.elements.firstPoisson.value);
     this.state.secondPoisson = parseFloat(this.elements.secondPoisson.value);
+    this.state.workOfAdhesion = parseFloat(this.elements.workOfAdhesion.value);
   },
   updateUI() {
     const { contactType, orientation } = this.state;
@@ -163,6 +170,11 @@ const app = {
     this.elements.secondShear.innerHTML = toFixed(results.secondShear, 2);
     this.elements.firstShearDepth.innerHTML = toFixed(results.firstShearDepth, 3);
     this.elements.secondShearDepth.innerHTML = toFixed(results.secondShearDepth, 3);
+
+    // Adhesion results
+    this.elements.pullOffForceValue.innerHTML = toFixed(results.pullOffForce, 3);
+    this.elements.taborParameterValue.innerHTML = toFixed(results.taborParameter, 3);
+    this.elements.adhesionModelValue.innerHTML = results.adhesionModel;
   },
   update() {
     this.readInputs();
