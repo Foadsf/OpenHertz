@@ -10,7 +10,7 @@
 
 </head>
 
-<body onload="updateResults()">
+<body>
 
     <h1>OpenHertz</h1>
     <p>
@@ -23,50 +23,6 @@
         <fieldset>
             <legend>Geometry</legend>
 
-
-            <style type="text/css">
-                .tg {
-                    border-collapse: collapse;
-                    border-spacing: 0;
-                }
-
-                .tg td {
-                    border-color: black;
-                    border-style: solid;
-                    border-width: 1px;
-                    font-family: Arial, sans-serif;
-                    font-size: 14px;
-                    overflow: hidden;
-                    padding: 10px 5px;
-                    word-break: normal;
-                }
-
-                .tg th {
-                    border-color: black;
-                    border-style: solid;
-                    border-width: 1px;
-                    font-family: Arial, sans-serif;
-                    font-size: 14px;
-                    font-weight: normal;
-                    overflow: hidden;
-                    padding: 10px 5px;
-                    word-break: normal;
-                }
-
-                .tg .tg-zv4m {
-                    border-color: #ffffff;
-                    text-align: left;
-                    vertical-align: top;
-                    min-width: 350px;
-                    width: 400px;
-                }
-
-                .tg .tg-8jgo {
-                    border-color: #ffffff;
-                    text-align: center;
-                    vertical-align: top
-                }
-            </style>
             <table class="tg" style="width:100%">
                 <thead>
                     <tr>
@@ -74,7 +30,7 @@
                             <p>
                                 <label>Contact type</label>
                                 <!-- <select id="contactTypeList" onchange="document.getElementById('contactType').src = this.value"> -->
-                                <select id="contactTypeList" value="1" onchange="contactTypeFun(this.value)">
+                                <select id="contactTypeList" value="1">
                                     <!-- <option value="pics/SpherePlane.PNG">Sphere - Plane</option>
                                 <option value="pics/SphereSphere.PNG">Sphere - Sphere</option>
                                 <option value="pics/CylinderPlane.PNG">Cylinder - Plane</option> -->
@@ -88,7 +44,7 @@
                             <p id="orientationList" style="display: none">
                                 <label>Orientation</label>
                                 <!-- <select onchange="document.getElementById('contactType').src = this.value"> -->
-                                <select id="OrientationSelector" onchange="orientationFun(this.value)">
+                                <select id="OrientationSelector">
                                     <!-- <option value="pics/CylinderCylinderPerpendicular.PNG">Perpendicular</option>
                                 <option value="pics/CylinderCylinderParallel.PNG">Parallel</option> -->
                                     <option value="1">Perpendicular</option>
@@ -109,20 +65,17 @@
                             <p>
                                 <label>First radius <b>R<sub>1</sub></b> (mm)</label>
                                 <input title="Please enter a positive number" id="firstRadius" type="number"
-                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="10.00"
-                                    onchange="updateResults()">
+                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="10.00">
                             </p>
                             <p id="secondRadius" style="display: none">
                                 <label>Second radius <b>R<sub>2</sub></b> (mm)</label>
                                 <input title="Please enter a number" id="secondRadiusValue" type="number"
-                                    pattern="-?[0-9]+([\.,][0-9]+)?" step="0.01" value="20.00"
-                                    onchange="updateResults()">
+                                    pattern="-?[0-9]+([\.,][0-9]+)?" step="0.01" value="20.00">
                             </p>
                             <p id="cylinderLength" style="display: none">
                                 <label>Cylinder's length <b>L</b> (mm)</label>
                                 <input title="Please enter a positive number" id="cylinderLengthValue" type="number"
-                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="30.00"
-                                    onchange="updateResults()">
+                                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="30.00">
                             </p>
 
                         </td>
@@ -139,7 +92,7 @@
             <p id="Force">
                 <label>Normal force <b>F</b> (N)</label>
                 <input title="Please enter a positive number" id="forceValue" type="number"
-                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="20.00" onchange="updateResults()">
+                    pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" value="20.00">
             </p>
         </fieldset>
 
@@ -154,61 +107,6 @@
             </p> -->
 
             <p>
-                <style type="text/css">
-                    .tg {
-                        border-collapse: collapse;
-                        border-spacing: 0;
-                    }
-
-                    .tg td {
-                        border-color: black;
-                        border-style: solid;
-                        border-width: 1px;
-                        font-family: Arial, sans-serif;
-                        font-size: 14px;
-                        overflow: hidden;
-                        padding: 10px 5px;
-                        word-break: normal;
-                    }
-
-                    .tg th {
-                        border-color: black;
-                        border-style: solid;
-                        border-width: 1px;
-                        font-family: Arial, sans-serif;
-                        font-size: 14px;
-                        font-weight: normal;
-                        overflow: hidden;
-                        padding: 10px 5px;
-                        word-break: normal;
-                    }
-
-                    .tg .tg-baqh {
-                        text-align: center;
-                        vertical-align: top
-                    }
-
-                    .tg .tg-73oq {
-                        border-color: #000000;
-                        text-align: left;
-                        vertical-align: top;
-                        min-width: 170px;
-                        width: 200px;
-                        /* max-width: 200px; */
-                    }
-
-                    .tg .tg-6qw1 {
-                        background-color: #c0c0c0;
-                        text-align: center;
-                        vertical-align: top
-                    }
-
-                    .tg .tg-y6fn {
-                        background-color: #c0c0c0;
-                        text-align: left;
-                        vertical-align: top
-                    }
-                </style>
             <table class="tg" style="width:100%">
                 <thead>
                     <tr>
@@ -221,20 +119,16 @@
                     <tr>
                         <td class="tg-y6fn">Young's modulus <b>E</b> (GPa)</td>
                         <td class="tg-baqh"><input id="firstElastic" title="Please enter a positive number"
-                                type="number" value="200" pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"
-                                onchange="updateResults()"></td>
+                                type="number" value="200" pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
                         <td class="tg-baqh"><input id="secondElastic" title="Please enter a positive number"
-                                type="number" value="200" pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"
-                                onchange="updateResults()"></td>
+                                type="number" value="200" pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
                     </tr>
                     <tr>
                         <td class="tg-y6fn">Poisson's ratio <b>𝜈</b></td>
                         <td class="tg-baqh"><input id="firstPoisson" title="Please enter a positive number below 0.5"
-                                type="number" value="0.3" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" max="0.5"
-                                onchange="updateResults()"></td>
+                                type="number" value="0.3" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" max="0.5"></td>
                         <td class="tg-baqh"><input id="secondPoisson" title="Please enter a positive number below 0.5"
-                                type="number" value="0.3" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" max="0.5"
-                                onchange="updateResults()"></td>
+                                type="number" value="0.3" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" min="0" max="0.5"></td>
                     </tr>
                     <tr>
                         <td class="tg-y6fn">Yield strength <b>σ<sub>Y</sub></b> (MPa)</td>
@@ -251,72 +145,6 @@
             <legend>Results</legend>
 
             <p>
-                <style type="text/css">
-                    .tg {
-                        border-collapse: collapse;
-                        border-spacing: 0;
-                    }
-
-                    .tg td {
-                        border-color: black;
-                        border-style: solid;
-                        border-width: 1px;
-                        font-family: Arial, sans-serif;
-                        font-size: 14px;
-                        overflow: hidden;
-                        padding: 10px 5px;
-                        word-break: normal;
-                    }
-
-                    .tg th {
-                        border-color: black;
-                        border-style: solid;
-                        border-width: 1px;
-                        font-family: Arial, sans-serif;
-                        font-size: 14px;
-                        font-weight: normal;
-                        overflow: hidden;
-                        padding: 10px 5px;
-                        word-break: normal;
-                    }
-
-                    .tg .tg-uqo3 {
-                        background-color: #efefef;
-                        text-align: center;
-                        vertical-align: top
-                    }
-
-                    .tg .tg-baqh {
-                        text-align: center;
-                        vertical-align: top
-                    }
-
-                    .tg .tg-c3ow {
-                        border-color: inherit;
-                        text-align: center;
-                        vertical-align: top
-                    }
-
-                    .tg .tg-kftd {
-                        background-color: #efefef;
-                        text-align: left;
-                        vertical-align: top
-                    }
-
-                    .tg .tg-0lax {
-                        text-align: left;
-                        vertical-align: top
-                    }
-
-                    .tg .tg-y698 {
-                        background-color: #efefef;
-                        border-color: inherit;
-                        text-align: left;
-                        vertical-align: top;
-                        min-width: 240px;
-                        width: 260px
-                    }
-                </style>
             <table class="tg" style="width:100%">
                 <thead>
                     <tr>
@@ -356,7 +184,7 @@
                     <tr id="lineContact" style="display: none">
                         <td class="tg-y698">Half contact width <b>b</b> (𝜇m)</td>
                         <td class="tg-c3ow" id="contactWidth"></td>
-                        <td class="tg-c3ow">
+                        <td class.tg-c3ow">
                             <p style="text-align:center;">
                                 <img src="pics/conactWidth.svg" alt="Contact width" height="60">
                             </p>
@@ -391,59 +219,6 @@
             </table>
             </p>
             <p>
-                <style type="text/css">
-                    .tg {
-                        border-collapse: collapse;
-                        border-spacing: 0;
-                    }
-
-                    .tg td {
-                        border-color: black;
-                        border-style: solid;
-                        border-width: 1px;
-                        font-family: Arial, sans-serif;
-                        font-size: 14px;
-                        overflow: hidden;
-                        padding: 10px 5px;
-                        word-break: normal;
-                    }
-
-                    .tg th {
-                        border-color: black;
-                        border-style: solid;
-                        border-width: 1px;
-                        font-family: Arial, sans-serif;
-                        font-size: 14px;
-                        font-weight: normal;
-                        overflow: hidden;
-                        padding: 10px 5px;
-                        word-break: normal;
-                    }
-
-                    .tg .tg-uqo3 {
-                        background-color: #efefef;
-                        text-align: center;
-                        vertical-align: top
-                    }
-
-                    .tg .tg-baqh {
-                        text-align: center;
-                        vertical-align: top
-                    }
-
-                    .tg .tg-kftd {
-                        background-color: #efefef;
-                        text-align: left;
-                        vertical-align: top
-                    }
-
-                    .tg .tg-0lax {
-                        text-align: left;
-                        vertical-align: top;
-                        min-width: 240px;
-                        width: 260px
-                    }
-                </style>
             <table class="tg" style="width:100%">
                 <thead>
                     <tr>

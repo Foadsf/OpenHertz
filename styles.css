@@ -3,3 +3,104 @@ fieldset {
     border-radius: 8px;
 }
 
+.tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.tg td {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: normal;
+}
+
+.tg th {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: normal;
+}
+
+.tg .tg-zv4m {
+    border-color: #ffffff;
+    text-align: left;
+    vertical-align: top;
+    min-width: 350px;
+    width: 400px;
+}
+
+.tg .tg-8jgo {
+    border-color: #ffffff;
+    text-align: center;
+    vertical-align: top
+}
+
+.tg .tg-baqh {
+    text-align: center;
+    vertical-align: top
+}
+
+.tg .tg-73oq {
+    border-color: #000000;
+    text-align: left;
+    vertical-align: top;
+    min-width: 170px;
+    width: 200px;
+    /* max-width: 200px; */
+}
+
+.tg .tg-6qw1 {
+    background-color: #c0c0c0;
+    text-align: center;
+    vertical-align: top
+}
+
+.tg .tg-y6fn {
+    background-color: #c0c0c0;
+    text-align: left;
+    vertical-align: top
+}
+
+.tg .tg-uqo3 {
+    background-color: #efefef;
+    text-align: center;
+    vertical-align: top
+}
+
+.tg .tg-c3ow {
+    border-color: inherit;
+    text-align: center;
+    vertical-align: top
+}
+
+.tg .tg-kftd {
+    background-color: #efefef;
+    text-align: left;
+    vertical-align: top
+}
+
+.tg .tg-0lax {
+    text-align: left;
+    vertical-align: top;
+    min-width: 240px;
+    width: 260px
+}
+
+.tg .tg-y698 {
+    background-color: #efefef;
+    border-color: inherit;
+    text-align: left;
+    vertical-align: top;
+    min-width: 240px;
+    width: 260px
+}
