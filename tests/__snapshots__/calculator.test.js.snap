@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Hertzian Contact Calculator should calculate the results for a cylinder on a plane 1`] = `
+{
+  "contactRadius": NaN,
+  "contactWidth": 81.63192999321268,
+  "effectiveElasticity": 114.64133639043564,
+  "effectiveRadius": 15,
+  "firstMises": 175.0192198209999,
+  "firstMisesDepth": 56.693563133725185,
+  "firstShear": 93.67751940098938,
+  "firstShearDepth": 64.17086016766449,
+  "indentation": 1.3549401742466494,
+  "maximumPressure": 311.9464515517462,
+  "secondMises": 175.0192198209999,
+  "secondMisesDepth": 56.693563133725185,
+  "secondShear": 93.67751940098938,
+  "secondShearDepth": 64.17086016766449,
+}
+`;
+
+exports[`Hertzian Contact Calculator should calculate the results for a sphere on a plane 1`] = `
+{
+  "contactRadius": 408.6651012781558,
+  "contactWidth": NaN,
+  "effectiveElasticity": 109.89010989010988,
+  "effectiveRadius": 10,
+  "firstMises": 1772.2649535659598,
+  "firstMisesDepth": 196.59978959269264,
+  "firstShear": 886.1031992903394,
+  "firstShearDepth": 196.59978959269264,
+  "indentation": 16.700716500268538,
+  "maximumPressure": 2858.948173079931,
+  "secondMises": 1772.2649535659598,
+  "secondMisesDepth": 196.59978959269264,
+  "secondShear": 886.1031992903394,
+  "secondShearDepth": 196.59978959269264,
+}
+`;

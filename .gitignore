@@ -67,3 +67,6 @@ test.html
 
 #refs
 *.pdf
+
+### Node ###
+node_modules/

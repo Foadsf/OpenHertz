@@ -1,0 +1,13 @@
+{
+  "name": "openhertz",
+  "version": "0.0.6",
+  "description": "A Free Hertzian contact calculator.",
+  "main": "scripts.js",
+  "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}
