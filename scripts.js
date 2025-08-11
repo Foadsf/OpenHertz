@@ -13,6 +13,8 @@ const app = {
     firstPoisson: 0.3,
     secondPoisson: 0.3,
     workOfAdhesion: 0.1,
+    firstYieldStrength: 400,
+    secondYieldStrength: 400,
   },
   elements: {},
   init() {
@@ -56,6 +58,9 @@ const app = {
     this.elements.pullOffForceValue = document.getElementById('pullOffForceValue');
     this.elements.taborParameterValue = document.getElementById('taborParameterValue');
     this.elements.adhesionModelValue = document.getElementById('adhesionModelValue');
+    this.elements.firstYieldStrength = document.getElementById('firstYieldStrength');
+    this.elements.secondYieldStrength = document.getElementById('secondYieldStrength');
+    this.elements.contactRegimeValue = document.getElementById('contactRegimeValue');
 
     // Add event listeners
     const inputs = [
@@ -64,7 +69,8 @@ const app = {
       this.elements.cylinderLengthValue, this.elements.forceValue,
       this.elements.firstElastic, this.elements.secondElastic,
       this.elements.firstPoisson, this.elements.secondPoisson,
-      this.elements.workOfAdhesion
+      this.elements.workOfAdhesion,
+      this.elements.firstYieldStrength, this.elements.secondYieldStrength
     ];
     inputs.forEach(input => {
         if(input) {
@@ -87,6 +93,8 @@ const app = {
     this.state.firstPoisson = parseFloat(this.elements.firstPoisson.value);
     this.state.secondPoisson = parseFloat(this.elements.secondPoisson.value);
     this.state.workOfAdhesion = parseFloat(this.elements.workOfAdhesion.value);
+    this.state.firstYieldStrength = parseFloat(this.elements.firstYieldStrength.value);
+    this.state.secondYieldStrength = parseFloat(this.elements.secondYieldStrength.value);
   },
   updateUI() {
     const { contactType, orientation } = this.state;
@@ -175,6 +183,9 @@ const app = {
     this.elements.pullOffForceValue.innerHTML = toFixed(results.pullOffForce, 3);
     this.elements.taborParameterValue.innerHTML = toFixed(results.taborParameter, 3);
     this.elements.adhesionModelValue.innerHTML = results.adhesionModel;
+
+    // Plasticity results
+    this.elements.contactRegimeValue.innerHTML = results.contactRegime;
   },
   update() {
     this.readInputs();

@@ -8,6 +8,7 @@ export function calculate(s) {
             firstShear: 0, secondShear: 0,
             firstShearDepth: 0, secondShearDepth: 0,
             pullOffForce: 0, taborParameter: 0, adhesionModel: 'N/A',
+            contactRegime: 'N/A',
         };
     }
     const isPointContact = s.contactType === '1' || s.contactType === '2' || (s.contactType === '4' && s.orientation === '1' && s.firstRadius === s.secondRadius);
@@ -134,6 +135,18 @@ export function calculate(s) {
         }
     }
 
+    // --- Plasticity Logic ---
+    let contactRegime = 'N/A';
+    if (isPointContact) {
+        const yieldStrength = Math.min(s.firstYieldStrength, s.secondYieldStrength);
+        const p_critical = 1.6 * yieldStrength;
+        if (maximumPressure < p_critical) {
+            contactRegime = 'Elastic';
+        } else {
+            contactRegime = 'Plastic';
+        }
+    }
+
 
     return {
       effectiveRadius, effectiveElasticity,
@@ -143,5 +156,6 @@ export function calculate(s) {
       firstShear, secondShear,
       firstShearDepth, secondShearDepth,
       pullOffForce, taborParameter, adhesionModel,
+      contactRegime,
     };
 }

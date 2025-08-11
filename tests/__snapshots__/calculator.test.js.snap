@@ -4,6 +4,7 @@ exports[`Hertzian Contact Calculator Core Calculations should calculate the resu
 {
   "adhesionModel": "N/A",
   "contactRadius": NaN,
+  "contactRegime": "N/A",
   "contactWidth": 81.63192999321268,
   "effectiveElasticity": 114.64133639043564,
   "effectiveRadius": 15,
@@ -26,6 +27,7 @@ exports[`Hertzian Contact Calculator Core Calculations should calculate the resu
 {
   "adhesionModel": "Intermediate (Maugis-Dugdale)",
   "contactRadius": 408.6651012781558,
+  "contactRegime": "Plastic",
   "contactWidth": NaN,
   "effectiveElasticity": 109.89010989010988,
   "effectiveRadius": 10,

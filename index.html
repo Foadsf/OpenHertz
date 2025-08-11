@@ -132,9 +132,9 @@
                     </tr>
                     <tr>
                         <td class="tg-y6fn">Yield strength <b>σ<sub>Y</sub></b> (MPa)</td>
-                        <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="400"
+                        <td class="tg-baqh"><input id="firstYieldStrength" title="Please enter a positive number" type="number" value="400"
                                 pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
-                        <td class="tg-baqh"><input title="Please enter a positive number" type="number" value="400"
+                        <td class="tg-baqh"><input id="secondYieldStrength" title="Please enter a positive number" type="number" value="400"
                                 pattern="[0-9]+([\.,][0-9]+)?" step="1" min="0"></td>
                     </tr>
                     <tr>
@@ -233,6 +233,11 @@
                      <tr>
                         <td class="tg-y698">Adhesion Model</td>
                         <td class="tg-c3ow" id="adhesionModelValue"></td>
+                        <td class="tg-c3ow"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-y698">Contact Regime</td>
+                        <td class="tg-c3ow" id="contactRegimeValue"></td>
                         <td class="tg-c3ow"></td>
                     </tr>
                 </tbody>

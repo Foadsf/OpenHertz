@@ -153,4 +153,33 @@ describe('Hertzian Contact Calculator', () => {
       expect(results.adhesionModel).toBe('Intermediate (Maugis-Dugdale)');
     });
   });
+
+  describe('Plasticity Calculations', () => {
+    const baseState = {
+      contactType: '1',
+      orientation: '1',
+      firstRadius: 10.0,
+      secondRadius: 20.0,
+      cylinderLength: 30.0,
+      firstElastic: 200,
+      secondElastic: 200,
+      firstPoisson: 0.3,
+      secondPoisson: 0.3,
+      workOfAdhesion: 0.1,
+      firstYieldStrength: 400,
+      secondYieldStrength: 500, // Weaker material should be used
+    };
+
+    it('should identify an elastic contact', () => {
+      const elasticState = { ...baseState, force: 1 }; // Very low force
+      const results = calculate(elasticState);
+      expect(results.contactRegime).toBe('Elastic');
+    });
+
+    it('should identify a plastic contact', () => {
+      const plasticState = { ...baseState, force: 10000 }; // High force
+      const results = calculate(plasticState);
+      expect(results.contactRegime).toBe('Plastic');
+    });
+  });
 });
