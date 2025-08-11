@@ -70,3 +70,4 @@ test.html
 
 ### Node ###
 node_modules/
+playwright-report/
