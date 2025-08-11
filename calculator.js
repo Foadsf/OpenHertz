@@ -1,4 +1,16 @@
 export function calculate(s) {
+    if (s.force < 0 || s.firstPoisson > 0.5 || s.secondPoisson > 0.5 || s.firstPoisson < 0 || s.secondPoisson < 0) {
+        return {
+            effectiveRadius: NaN, effectiveElasticity: NaN,
+            contactRadius: NaN, contactWidth: NaN, indentation: NaN, maximumPressure: NaN,
+            firstMises: NaN, secondMises: NaN,
+            firstMisesDepth: NaN, secondMisesDepth: NaN,
+            firstShear: NaN, secondShear: NaN,
+            firstShearDepth: NaN, secondShearDepth: NaN,
+            pullOffForce: NaN, taborParameter: NaN, adhesionModel: 'N/A',
+            contactRegime: 'Invalid Input',
+        };
+    }
     if (s.force === 0) {
         return {
             effectiveRadius: 0, effectiveElasticity: 0,
